@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ดูดวงจากวันเกิด — คัมภีร์ดวง</title>
+<meta name="description" content="ดูดวงจากวันเกิด ดาวประจำตัว มหาทักษา ตำราเศษพระจอมเกล้า Life Path Number นักษัตร สีมงคล">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600&family=Sarabun:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0c10;--surface:#141418;--surface2:#1a1a22;--border:rgba(255,255,255,0.08);--text:#f2f0f8;--text2:#8888aa;--purple:#9b7fe8;--purple2:#c4a8ff;--gold:#e8c97a;--radius:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;min-height:100vh}
+.header{text-align:center;padding:2.5rem 1.5rem 1.5rem;background:radial-gradient(ellipse at 50% 0%,rgba(155,127,232,0.12) 0%,transparent 70%)}
+.site-name{font-size:11px;letter-spacing:3px;color:var(--purple);margin-bottom:10px;opacity:.8}
+.main-title{font-family:'Noto Serif Thai',serif;font-size:clamp(22px,5vw,32px);font-weight:600;margin-bottom:6px}
+.main-sub{font-size:13px;color:var(--text2)}
+.container{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.input-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:8px;margin-bottom:6px}
+.form-grid input{padding:10px 6px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:18px;font-family:'JetBrains Mono',monospace;text-align:center;width:100%}
+.form-grid input:focus{outline:none;border-color:var(--purple)}
+.form-labels{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:8px;margin-bottom:.75rem}
+.form-labels span{font-size:11px;color:var(--text2);text-align:center}
+.note{font-size:11px;color:var(--text2);text-align:center;padding:6px 10px;background:var(--surface2);border-radius:8px;margin-bottom:.75rem}
+.go-btn{width:100%;padding:11px;border:none;border-radius:10px;background:var(--purple);color:#fff;font-family:'Sarabun',sans-serif;font-size:15px;cursor:pointer;margin-bottom:.5rem}
+.go-btn:hover{background:var(--purple2);color:#0c0c10}
+.err{font-size:12px;color:#e05c5c;text-align:center;display:none;margin-bottom:.75rem}
+.result{display:none}
+.sec{font-size:11px;letter-spacing:1.5px;color:var(--purple);text-transform:uppercase;margin:1.25rem 0 10px;opacity:.8}
+.day-banner{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);margin-bottom:1rem}
+.day-circle{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;color:#fff}
+.day-name{font-size:20px;font-weight:500}
+.day-planet{font-size:13px;color:var(--text2);margin-top:2px}
+.day-el{font-size:12px;color:var(--text2);margin-top:2px}
+.color-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.color-card{border-radius:10px;border:1px solid var(--border);overflow:hidden;background:var(--surface)}
+.cc-header{font-size:11px;font-weight:500;padding:6px 10px;color:var(--text2)}
+.cc-pills{display:flex;flex-wrap:wrap;gap:5px;padding:0 10px 10px}
+.cpill{display:flex;align-items:center;gap:5px;padding:4px 8px;border-radius:16px;border:1px solid var(--border);background:var(--surface2)}
+.cdot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);flex-shrink:0}
+.cname{font-size:11px;color:var(--text)}
+.dim{opacity:.6}
+.num-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.num-card{border-radius:var(--radius);border:1px solid var(--border);padding:12px 14px;background:var(--surface)}
+.ns-lbl{font-size:11px;color:var(--text2);margin-bottom:4px}
+.ns-val{font-size:30px;font-weight:500}
+.ns-meaning{font-size:12px;color:var(--text2);line-height:1.5;margin-top:3px}
+.zodiac-row{display:flex;align-items:flex-start;gap:12px;border:1px solid var(--border);border-radius:var(--radius);padding:12px;background:var(--surface);margin-bottom:1rem}
+.z-icon{font-size:34px;flex-shrink:0;line-height:1}
+.z-name{font-size:15px;font-weight:500}
+.z-el{font-size:12px;color:var(--text2);margin:2px 0 4px}
+.z-trait{font-size:12px;color:var(--text2);line-height:1.6}
+.z-chong{font-size:12px;margin-top:6px;color:var(--text2)}
+.calc-box{background:var(--surface);border-radius:var(--radius);padding:10px 14px;font-size:12px;font-family:'JetBrains Mono',monospace;line-height:1.9;color:var(--text2);margin-bottom:1rem}
+.share-btn{width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--text);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer}
+.share-btn:hover{background:var(--surface)}
+footer{text-align:center;padding:2rem;font-size:12px;color:var(--text2);border-top:1px solid var(--border);opacity:.5}
+.gt{color:#4ade80}.bt{color:#f87171}.nt{color:#fbbf24}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="site-name">คัมภีร์ดวง</div>
+  <h1 class="main-title">ดูดวงจากวันเกิด</h1>
+  <p class="main-sub">ดาวประจำตัว · มหาทักษา · เศษพระจอมเกล้า · Life Path</p>
+</div>
+<div class="container">
+  <div class="input-card">
+    <div class="form-grid">
+      <input id="dd" type="tel" maxlength="2" placeholder="DD" inputmode="numeric">
+      <input id="mm" type="tel" maxlength="2" placeholder="MM" inputmode="numeric">
+      <input id="yyyy" type="tel" maxlength="4" placeholder="พ.ศ." inputmode="numeric">
+      <input id="hh" type="tel" maxlength="2" placeholder="HH" inputmode="numeric">
+    </div>
+    <div class="form-labels"><span>วัน</span><span>เดือน</span><span>ปี พ.ศ.</span><span>ชั่วโมง</span></div>
+    <div class="note">⚠️ วันใหม่เริ่ม 06:00 น. · วันพุธต้องใส่เวลา (กลางวัน/กลางคืน)</div>
+    <button class="go-btn" onclick="run()">วิเคราะห์ดวงชะตา ↗</button>
+    <div class="err" id="err">กรุณากรอกวัน เดือน ปีพ.ศ. ให้ถูกต้อง</div>
+  </div>
+  <div class="result" id="res">
+    <div class="sec">ดาวประจำตัว</div>
+    <div class="day-banner">
+      <div class="day-circle" id="dc"></div>
+      <div>
+        <div class="day-name" id="dn"></div>
+        <div class="day-planet" id="dp"></div>
+        <div class="day-el" id="de"></div>
+      </div>
+    </div>
+    <div class="sec">สีมงคลประจำตัวตลอดชีพ (มหาทักษา)</div>
+    <div class="color-grid" id="cg"></div>
+    <div class="sec">เลขชีวิต 2 ระบบ</div>
+    <div class="num-grid" id="ng"></div>
+    <div class="sec">ปีนักษัตร</div>
+    <div class="zodiac-row"><div class="z-icon" id="zi"></div><div><div class="z-name" id="zn"></div><div class="z-el" id="ze"></div><div class="z-trait" id="zt"></div><div class="z-chong" id="zc"></div></div></div>
+    <div class="sec">วิธีคำนวณ</div>
+    <div class="calc-box" id="cb"></div>
+    <button class="share-btn" onclick="shr()">แชร์ดวงของฉันใน LINE ↗</button>
+  </div>
+</div>
+<footer><p>คัมภีร์ดวง — ข้อมูลอ้างอิงตามหลักโหราศาสตร์ไทย เพื่อความบันเทิงเท่านั้น</p></footer>
+<script>
+const DAYS=[
+  {id:0,name:"อาทิตย์",planet:"ดาวอาทิตย์",element:"ธาตุไฟ",color:"#DC143C",colors:{base:["แดง:#DC143C"],sri:["เขียว:#228B22"],dej:["ชมพู:#FF69B4"],kal:["ฟ้า:#87CEEB","น้ำเงิน:#0000CD"]}},
+  {id:1,name:"จันทร์",planet:"ดาวจันทร์",element:"ธาตุดินอุ้มน้ำ",color:"#FFD700",colors:{base:["เหลือง:#FFD700","ขาว:#F5F5F5"],sri:["ดำ:#333333","ม่วง:#800080"],dej:["เขียว:#228B22"],kal:["ส้ม:#FFA500","แดง:#DC143C"]}},
+  {id:2,name:"อังคาร",planet:"ดาวอังคาร",element:"ธาตุลมร้อน",color:"#FF69B4",colors:{base:["ชมพู:#FF69B4"],sri:["เหลือง:#FFD700","ส้ม:#FFA500"],dej:["ดำ:#333333","ม่วง:#800080"],kal:["ขาว:#F5F5F5","นวล:#FFFDD0"]}},
+  {id:3,name:"พุธ (กลางวัน)",planet:"ดาวพุธ",element:"ธาตุน้ำขุ่น",color:"#228B22",colors:{base:["เขียว:#228B22"],sri:["เทา:#808080","ดำ:#333333"],dej:["ส้ม:#FFA500","แสด:#FF4500"],kal:["ชมพู:#FF69B4","แดง:#DC143C"]}},
+  {id:8,name:"พุธ (กลางคืน)",planet:"พระราหู",element:"ธาตุลมพายุ",color:"#555577",colors:{base:["เทา:#808080","ดำ:#333333"],sri:["ขาว:#F5F5F5","นวล:#FFFDD0"],dej:["แดง:#DC143C"],kal:["เหลือง:#FFD700","ส้ม:#FFA500"]}},
+  {id:4,name:"พฤหัสบดี",planet:"ดาวพฤหัสบดี",element:"ธาตุดินแข็ง",color:"#FF8C00",colors:{base:["ส้ม:#FF8C00","แสด:#FF4500"],sri:["แดง:#DC143C"],dej:["ฟ้า:#87CEEB","น้ำเงิน:#0000CD"],kal:["ดำ:#333333","ม่วง:#800080"]}},
+  {id:5,name:"ศุกร์",planet:"ดาวศุกร์",element:"ธาตุน้ำใส",color:"#87CEEB",colors:{base:["ฟ้า:#87CEEB","น้ำเงิน:#0000CD"],sri:["ชมพู:#FF69B4"],dej:["ขาว:#F5F5F5","นวล:#FFFDD0"],kal:["เขียว:#228B22","เทา:#808080"]}},
+  {id:6,name:"เสาร์",planet:"ดาวเสาร์",element:"ธาตุไฟสุมขอน",color:"#333355",colors:{base:["ดำ:#333333","ม่วง:#800080"],sri:["ฟ้า:#87CEEB","น้ำเงิน:#0000CD"],dej:["เทา:#808080"],kal:["เขียว:#228B22"]}},
+];
+const ZODIACS=[
+  {n:"ปีชวด",i:"🐀",e:"ธาตุน้ำ",chong:"ปีมะเมีย",t:"ฉลาด ปรับตัวเก่ง บริหารการเงินดี แต่ขี้ระแวง",base:1960},
+  {n:"ปีฉลู",i:"🐂",e:"ธาตุดิน",chong:"ปีมะแม",t:"อดทน ซื่อสัตย์ รับผิดชอบสูง แต่ดื้อรั้น",base:1961},
+  {n:"ปีขาล",i:"🐯",e:"ธาตุไม้",chong:"ปีวอก",t:"กล้าหาญ เป็นผู้นำ มีเสน่ห์ แต่อารมณ์ร้อน",base:1962},
+  {n:"ปีเถาะ",i:"🐇",e:"ธาตุไม้",chong:"ปีระกา",t:"เห็นอกเห็นใจ รอบคอบ ศิลปะสูง แต่โลเล",base:1963},
+  {n:"ปีมะโรง",i:"🐉",e:"ธาตุดิน",chong:"ปีจอ",t:"ทะเยอทะยาน วิสัยทัศน์กว้าง มีเสน่ห์ แต่หยิ่ง",base:1964},
+  {n:"ปีมะเส็ง",i:"🐍",e:"ธาตุไฟ",chong:"ปีกุน",t:"สัญชาตญาณแม่น ฉลาด เสน่ห์ลึกลับ แต่ขี้สงสัย",base:1965},
+  {n:"ปีมะเมีย",i:"🐴",e:"ธาตุไฟ",chong:"ปีชวด",t:"พลังงานสูง รักอิสระ สังคมดี แต่ขาดความอดทน",base:1966},
+  {n:"ปีมะแม",i:"🐐",e:"ธาตุดิน",chong:"ปีฉลู",t:"สร้างสรรค์ มีเมตตา สุภาพ แต่วิตกกังวล",base:1967},
+  {n:"ปีวอก",i:"🐒",e:"ธาตุโลหะ",chong:"ปีขาล",t:"ฉลาดว่องไว แก้ปัญหาเก่ง แต่บางครั้งใช้เล่ห์",base:1968},
+  {n:"ปีระกา",i:"🐓",e:"ธาตุโลหะ",chong:"ปีเถาะ",t:"มีระเบียบ ซื่อสัตย์ ตรงไปตรงมา แต่วิพากษ์เยอะ",base:1969},
+  {n:"ปีจอ",i:"🐕",e:"ธาตุดิน",chong:"ปีมะโรง",t:"ซื่อสัตย์ ยุติธรรม ปกป้องคนที่รัก แต่เข้าถึงยาก",base:1970},
+  {n:"ปีกุน",i:"🐷",e:"ธาตุน้ำ",chong:"ปีมะเส็ง",t:"มีเมตตา ใจกว้าง ซื่อสัตย์ แต่ไว้ใจคนง่ายเกิน",base:1971},
+];
+const GOOD_S=[1,4,5,6,9,14,15,19,24,29,32,36,39,41,42,45,46,50,51,54,55,56,59,60,63,64,65,69];
+const BAD_S=[7,8,11,12,18,20,21,22,26,27,30,37,38,43,47,48,57,58,61,62,66,67,68,70,71,72,73,74];
+const MN={1:"ดาวอาทิตย์ พลังความเชื่อมั่น ความเป็นผู้นำสูง มุ่งมั่นสู่ความสำเร็จ",2:"ดาวจันทร์ พลังจินตนาการ อ่อนโยน มีเมตตา มีเสน่ห์",3:"ดาวอังคาร พลังกล้าหาญ เด็ดเดี่ยว ต้องระวังความใจร้อน",4:"ดาวพุธ พลังสติปัญญา ฉลาด วาทศิลป์เป็นเลิศ",5:"ดาวพฤหัสบดี พลังคุณธรรม มีปัญญาบริสุทธิ์ มีผู้ใหญ่อุปถัมภ์",6:"ดาวศุกร์ พลังศิลปะวิทยาการ มีรสนิยม มีโชคด้านการเงิน",7:"ดาวเสาร์ พลังความอดทน ต้องฝ่าฟันอุปสรรค ก่อนจะพบความสำเร็จ",8:"ดาวราหู พลังลุ่มหลง มีไหวพริบพลิกแพลง กล้าเสี่ยง",9:"ดาวเกตุ พลังสิ่งศักดิ์สิทธิ์ มีลางสังหรณ์แม่นยำ แคล้วคลาดจากอันตราย",33:"เลขปรมาจารย์ 33 — เมตตากรุณา เสียสละเพื่อส่วนรวม ผู้นำทางจิตวิญญาณ",11:"เลขปรมาจารย์ 11 — แรงบันดาลใจ สัญชาตญาณสูง จิตวิญญาณพิเศษ",22:"เลขปรมาจารย์ 22 — นักสร้าง วิสัยทัศน์ใหญ่ เปลี่ยนโลก"};
+const MESES={1:"เสาเรือนไฟไหม้ ชีวิตต้องพึ่งพาตนเอง อาภัพที่พึ่งพิง",2:"จะครองไข้ มีโรคประจำตัวเบียดเบียน กระทบการออมทรัพย์",3:"ความสบาย ชีวิตมีความสุขสบายตามสมควร ฐานะปานกลาง",4:"มีบริวาร ดวงคนมีบุญวาสนา มีผู้คอยช่วยเหลืออุปถัมภ์",5:"ชะตากลับ ช่วงต้นยากลำบาก บั้นปลายร่ำรวยอย่างยิ่ง",6:"จะยกญาติ ได้รับการสนับสนุนจากเครือญาติ ตั้งตัวได้มั่นคง",7:"ผ้าขาด ต้องเหน็ดเหนื่อยกับการแสวงหาทรัพย์ มีภาระใช้สอยมาก",8:"เปรื่องยศ ดวงชะตาแห่งผู้นำ เจริญด้วยยศถาบรรดาศักดิ์และทรัพย์สิน",9:"กินข้าวกลางตลาด สู้ชีวิต ต้องทำงานหนัก ขวนขวายตลอดเวลา",10:"นกแขกเต้า ชีวิตขึ้นอยู่กับการคบหา คบคนดีจะเจริญ คบคนพาลจะพินาศ"};
+const MTH={1:2,2:3,3:4,4:5,5:6,6:7,7:8,8:9,9:10,10:11,11:12,12:1};
+function getDOW(d,m,y){if(m<3){m+=12;y--;}const k=y%100,j=Math.floor(y/100);const h=(d+Math.floor(13*(m+1)/5)+k+Math.floor(k/4)+Math.floor(j/4)-2*j)%7;return(((h+6)%7)+7)%7;}
+function getZ(ceY){return ZODIACS[((ceY-1900)%12+12)%12];}
+function calcLP(d,m,y){const digs=[...String(d).padStart(2,'0'),...String(m).padStart(2,'0'),...String(y)].map(Number);let s=digs.reduce((a,b)=>a+b,0);const steps=[digs.join('+')+' = '+s];while(s>9&&s!==11&&s!==22&&s!==33){const d2=String(s).split('').map(Number);const s2=d2.reduce((a,b)=>a+b,0);steps.push(String(s).split('').join('+')+' = '+s2);s=s2;}return{val:s,steps};}
+function calcSesa(dow,m,ceY){const dv=dow===0?1:dow;const mv=MTH[m];const zv=ZODIACS.indexOf(getZ(ceY))+1;const tot=dv+mv+zv;const s=tot>10?tot%10||10:tot;return{val:s,dv,mv,zv,tot};}
+function makePills(arr){return arr.map(s=>{const[name,hex]=s.split(':');return`<div class="cpill"><div class="cdot" style="background:${hex}"></div><span class="cname">${name}</span></div>`;}).join('');}
+function rd(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);return n;}
+
+function run(){
+  const dd=parseInt(document.getElementById('dd').value)||0;
+  const mm=parseInt(document.getElementById('mm').value)||0;
+  const be=parseInt(document.getElementById('yyyy').value)||0;
+  const hh=parseInt(document.getElementById('hh').value)||6;
+  const ok=dd>=1&&dd<=31&&mm>=1&&mm<=12&&be>=2400&&be<=2700;
+  document.getElementById('err').style.display=ok?'none':'block';
+  if(!ok)return;
+  document.getElementById('res').style.display='block';
+  const ce=be-543;
+  let aDD=dd,aMM=mm,aCE=ce;
+  if(hh<6){const prev=new Date(ce,mm-1,dd-1);aDD=prev.getDate();aMM=prev.getMonth()+1;aCE=prev.getFullYear();}
+  let dow=getDOW(aDD,aMM,aCE);
+  let dayData=DAYS.find(d=>d.id===dow);
+  if(dow===3&&hh>=18)dayData=DAYS.find(d=>d.id===8);
+  const zodiac=getZ(ce);
+  const lp=calcLP(dd,mm,ce);
+  const sesa=calcSesa(dow===0?0:dow,mm,ce);
+
+  document.getElementById('dc').style.background=dayData.color;
+  document.getElementById('dc').textContent='วัน'+dayData.name.slice(0,2);
+  document.getElementById('dn').textContent='วัน'+dayData.name;
+  document.getElementById('dp').textContent=dayData.planet;
+  document.getElementById('de').textContent=dayData.element+(hh<6?' (ปรับ: เกิดก่อน 06:00 น.)':'');
+
+  const c=dayData.colors;
+  document.getElementById('cg').innerHTML=`
+    <div class="color-card"><div class="cc-header">พื้นฐาน</div><div class="cc-pills">${makePills(c.base)}</div></div>
+    <div class="color-card"><div class="cc-header">ศรี — เรียกโชคลาภ</div><div class="cc-pills">${makePills(c.sri)}</div></div>
+    <div class="color-card"><div class="cc-header">เดช — เสริมอำนาจ</div><div class="cc-pills">${makePills(c.dej)}</div></div>
+    <div class="color-card dim"><div class="cc-header">กาลกิณี — หลีกเลี่ยง</div><div class="cc-pills">${makePills(c.kal)}</div></div>`;
+
+  const lpMean=MN[lp.val]||'';
+  const lpC=[33,11,22].includes(lp.val)?'gt':lp.val<=5?'gt':'nt';
+  const sesaMean=MESES[sesa.val]||'';
+  const sesaC=[4,5,6,8].includes(sesa.val)?'gt':[1,2,7].includes(sesa.val)?'bt':'nt';
+  document.getElementById('ng').innerHTML=`
+    <div class="num-card"><div class="ns-lbl">Life Path Number (ตะวันตก / ค.ศ.)</div><div class="ns-val ${lpC}">${lp.val}</div><div class="ns-meaning">${lpMean}</div></div>
+    <div class="num-card"><div class="ns-lbl">เศษพระจอมเกล้า (ไทยโบราณ)</div><div class="ns-val ${sesaC}">เศษ ${sesa.val}</div><div class="ns-meaning">${sesaMean}</div></div>`;
+
+  document.getElementById('zi').textContent=zodiac.i;
+  document.getElementById('zn').textContent=zodiac.n+' (ค.ศ. '+ce+')';
+  document.getElementById('ze').textContent=zodiac.e;
+  document.getElementById('zt').textContent=zodiac.t;
+  document.getElementById('zc').innerHTML='⚔️ คู่ชง: <strong>'+zodiac.chong+'</strong>';
+
+  const sesaS=`วัน(${dayData.name.split(' ')[0]})=${sesa.dv} | เดือนไทย=${sesa.mv} | ปีนักษัตร(${zodiac.n})=${sesa.zv}\n${sesa.dv}+${sesa.mv}+${sesa.zv}=${sesa.tot}${sesa.tot>10?' → เศษ '+sesa.val:' = เศษ '+sesa.val}`;
+  const lpS='Life Path (ค.ศ.'+ce+'): '+lp.steps.join(' → ');
+  document.getElementById('cb').textContent='─ เศษพระจอมเกล้า ─\n'+sesaS+'\n\n─ Life Path ─\n'+lpS;
+}
+function shr(){
+  const dd=document.getElementById('dd').value,mm=document.getElementById('mm').value,yyyy=document.getElementById('yyyy').value;
+  const dn=document.getElementById('dn').textContent,dp=document.getElementById('dp').textContent;
+  const lp=document.querySelector('.num-card .ns-val')?.textContent||'';
+  const sesa=document.querySelectorAll('.num-card .ns-val')[1]?.textContent||'';
+  const zn=document.getElementById('zn').textContent;
+  navigator.clipboard&&navigator.clipboard.writeText(`🎂 ดวงวันเกิด ${dd}/${mm}/${yyyy} (พ.ศ.)\n${dn} — ${dp}\n⭐ Life Path: ${lp} | ${sesa}\n🐾 ${zn}\n\n✨ เช็คดวงของคุณที่ คัมภีร์ดวง`).then(()=>alert('คัดลอกแล้ว'));
+}
+['dd','mm','yyyy'].forEach((id,i)=>{document.getElementById(id).addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'');if(e.target.value.length===[2,2,4][i])document.getElementById(['mm','yyyy','hh'][i]).focus();});});
+document.getElementById('hh').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'');});
+document.getElementById('hh').addEventListener('keydown',e=>{if(e.key==='Enter')run();});
+</script>
+</body>
+</html>
