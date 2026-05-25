@@ -1,388 +1,190 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BRJVKR6BV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0BRJVKR6BV');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0BRJVKR6BV');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>สีเสื้อมงคลประจำวัน — คัมภีร์ดวง</title>
 <meta name="description" content="เช็กสีเสื้อมงคลประจำวันตามหลักโหราศาสตร์ไทย สีดีเสริมโชค สีกาลกิณีที่ควรหลีกเลี่ยง อัปเดตทุกวัน">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kambheerduang.com/สีเสื้อมงคล/tool.html">
+<meta property="og:title" content="สีเสื้อมงคลประจำวัน — คัมภีร์ดวง">
+<meta property="og:description" content="เช็กสีเสื้อมงคลประจำวันตามหลักโหราศาสตร์ไทย สีดีเสริมโชค สีกาลกิณีที่ควรหลีกเลี่ยง">
+<meta property="og:image" content="https://kambheerduang.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="th_TH">
+<meta property="og:site_name" content="คัมภีร์ดวง">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d0d12;
-    --surface: #16161f;
-    --surface2: #1e1e2a;
-    --border: rgba(255,255,255,0.08);
-    --text: #f0ede6;
-    --text2: #9b9aaa;
-    --gold: #c9a84c;
-    --gold2: #e8c97a;
-    --radius: 16px;
-    --radius-sm: 10px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Sarabun', sans-serif;
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  /* HEADER */
-  .header {
-    text-align: center;
-    padding: 3rem 1.5rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .site-name {
-    font-family: 'Noto Serif Thai', serif;
-    font-size: 12px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    opacity: 0.8;
-  }
-  .main-title {
-    font-family: 'Noto Serif Thai', serif;
-    font-size: clamp(24px, 6vw, 36px);
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-  .main-sub {
-    font-size: 14px;
-    color: var(--text2);
-  }
-
-  /* DAY SELECTOR */
-  .day-nav {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 0 1rem 1.5rem;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .day-btn {
-    padding: 7px 14px;
-    border-radius: 30px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text2);
-    font-family: 'Sarabun', sans-serif;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .day-btn:hover { border-color: var(--gold); color: var(--gold); }
-  .day-btn.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #0d0d12;
-    font-weight: 500;
-  }
-  .today-tag {
-    font-size: 10px;
-    background: rgba(201,168,76,0.2);
-    color: var(--gold);
-    padding: 1px 6px;
-    border-radius: 10px;
-    margin-left: 4px;
-  }
-
-  /* MAIN CONTENT */
-  .content {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 1rem 3rem;
-  }
-
-  /* CURRENT DAY CARD */
-  .day-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    margin-bottom: 1.25rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .day-card::after {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 120px; height: 120px;
-    background: radial-gradient(circle at top right, rgba(201,168,76,0.08), transparent 70%);
-    pointer-events: none;
-  }
-  .day-info-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 1rem;
-  }
-  .planet-badge {
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px;
-    color: var(--gold);
-    text-align: center;
-    line-height: 1.3;
-    flex-shrink: 0;
-  }
-  .day-name-big {
-    font-family: 'Noto Serif Thai', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .planet-name {
-    font-size: 13px;
-    color: var(--text2);
-    margin-top: 2px;
-  }
-  .day-desc {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.7;
-    border-left: 2px solid rgba(201,168,76,0.3);
-    padding-left: 12px;
-  }
-
-  /* COLOR SECTIONS */
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin: 1.25rem 0 0.75rem;
-    opacity: 0.8;
-  }
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 8px;
-    margin-bottom: 0.5rem;
-  }
-  .color-card {
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    transition: transform 0.15s;
-  }
-  .color-card:hover { transform: translateY(-2px); }
-  .color-swatch {
-    height: 60px;
-    width: 100%;
-    position: relative;
-  }
-  .color-swatch-white {
-    border-bottom: 1px solid var(--border);
-  }
-  .color-info {
-    padding: 7px 8px;
-  }
-  .color-name { font-size: 12px; font-weight: 500; color: var(--text); }
-  .color-hex { font-size: 10px; color: var(--text2); font-family: monospace; margin-top: 1px; }
-  .color-benefit { font-size: 10px; color: var(--text2); margin-top: 3px; line-height: 1.4; }
-  .role-badge {
-    display: inline-block;
-    font-size: 9px;
-    padding: 1px 6px;
-    border-radius: 8px;
-    margin-bottom: 3px;
-  }
-  .role-primary { background: rgba(201,168,76,0.2); color: var(--gold); }
-  .role-secondary { background: rgba(255,255,255,0.06); color: var(--text2); }
-
-  /* BAD COLORS */
-  .bad-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(220,53,69,0.25);
-    background: rgba(220,53,69,0.06);
-    margin-bottom: 8px;
-  }
-  .bad-swatch {
-    width: 38px; height: 38px;
-    border-radius: 8px;
-    flex-shrink: 0;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  .bad-name { font-size: 13px; font-weight: 500; color: var(--text); }
-  .bad-reason { font-size: 11px; color: var(--text2); margin-top: 2px; line-height: 1.5; }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 12px;
-    color: var(--text2);
-    border-top: 1px solid var(--border);
-    opacity: 0.6;
-  }
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 1.25rem 0;
-  }
-
-  @media(max-width:480px){
-    .color-grid { grid-template-columns: repeat(3,1fr); }
-  }
+:root{--bg:#0d0d12;--surface:#16161f;--surface2:#1e1e2a;--border:rgba(255,255,255,0.08);--text:#f0ede6;--text2:#9b9aaa;--gold:#c9a84c;--gold2:#e8c97a;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:100;background:rgba(13,13,18,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:680px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem}
+.logo{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:var(--gold)}
+.nav-links{display:flex;gap:1.25rem;font-size:13px;color:var(--text2)}
+.nav-links a:hover{color:var(--gold)}
+.wrap{padding:1.5rem 1rem 2rem;max-width:680px;margin:0 auto}
+.header{text-align:center;margin-bottom:1.5rem}
+.site-lbl{font-size:11px;letter-spacing:2px;color:var(--gold);opacity:.8;margin-bottom:8px}
+.main-title{font-family:'Noto Serif Thai',serif;font-size:clamp(22px,5vw,30px);font-weight:600;margin-bottom:4px}
+.main-sub{font-size:13px;color:var(--text2)}
+.day-nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.day-btn{padding:7px 14px;border-radius:30px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+.day-btn:hover{border-color:var(--gold);color:var(--gold)}
+.day-btn.active{background:var(--gold);border-color:var(--gold);color:#0d0d12;font-weight:500}
+.today-tag{font-size:10px;background:rgba(201,168,76,0.2);color:var(--gold);padding:1px 6px;border-radius:10px;margin-left:4px}
+.day-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem}
+.day-info{display:flex;align-items:center;gap:14px;margin-bottom:1rem}
+.planet-badge{width:52px;height:52px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gold);text-align:center;line-height:1.3;flex-shrink:0}
+.day-name{font-family:'Noto Serif Thai',serif;font-size:22px;font-weight:600}
+.planet-name{font-size:13px;color:var(--text2);margin-top:2px}
+.day-desc{font-size:13px;color:var(--text2);line-height:1.7;border-left:2px solid rgba(201,168,76,0.3);padding-left:12px}
+.sec-lbl{font-size:11px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;opacity:.8;margin:1.25rem 0 .75rem}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px}
+.color-card{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--surface2)}
+.color-swatch{height:60px;width:100%}
+.color-info{padding:7px 8px}
+.color-name{font-size:12px;font-weight:500}
+.color-hex{font-size:10px;color:var(--text2);font-family:monospace;margin-top:1px}
+.color-benefit{font-size:10px;color:var(--text2);margin-top:3px;line-height:1.4}
+.role-badge{display:inline-block;font-size:9px;padding:1px 6px;border-radius:8px;margin-bottom:3px}
+.role-p{background:rgba(201,168,76,0.2);color:var(--gold)}
+.role-s{background:rgba(255,255,255,0.06);color:var(--text2)}
+.bad-card{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;border:1px solid rgba(220,53,69,0.25);background:rgba(220,53,69,0.06);margin-bottom:8px}
+.bad-swatch{width:38px;height:38px;border-radius:8px;flex-shrink:0;border:1px solid rgba(255,255,255,0.1)}
+.bad-name{font-size:13px;font-weight:500}
+.bad-reason{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.5}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0}
+.share-btn{width:100%;padding:11px;border:1px solid var(--border);border-radius:var(--r);background:transparent;color:var(--text);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;margin-top:.75rem}
+.share-btn:hover{background:var(--surface)}
+footer{text-align:center;padding:2rem;font-size:12px;color:var(--text2);border-top:1px solid var(--border);opacity:.5}
+@media(max-width:480px){.color-grid{grid-template-columns:repeat(3,1fr)}.nav-links{display:none}}
 </style>
 </head>
 <body>
-<nav style="position:sticky;top:0;z-index:100;background:rgba(10,10,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between">
-  <a href="/" style="font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:#c9a84c;text-decoration:none">⭐ คัมภีร์ดวง</a>
-  <div style="display:flex;gap:1.25rem;font-size:13px">
-    <a href="/สีเสื้อมงคล/tool.html" style="color:#9b9aaa;text-decoration:none">สีเสื้อ</a>
-    <a href="/เบอร์มงคล/tool.html" style="color:#9b9aaa;text-decoration:none">เบอร์</a>
-    <a href="/ดูดวง/tool.html" style="color:#9b9aaa;text-decoration:none">ดูดวง</a>
-    <a href="/ชื่อมงคล/tool.html" style="color:#9b9aaa;text-decoration:none">ชื่อมงคล</a>
+<nav><div class="nav-inner">
+  <a href="/" class="logo">⭐ คัมภีร์ดวง</a>
+  <div class="nav-links">
+    <a href="/สีเสื้อมงคล/tool.html" style="color:var(--gold)">สีเสื้อ</a>
+    <a href="/เบอร์มงคล/tool.html">เบอร์</a>
+    <a href="/ดูดวง/tool.html">ดูดวง</a>
+    <a href="/ชื่อมงคล/tool.html">ชื่อมงคล</a>
   </div>
-</nav>
+</div></nav>
 
+<div class="wrap">
 <div class="header">
-  <div class="site-name">คัมภีร์ดวง</div>
+  <div class="site-lbl">คัมภีร์ดวง</div>
   <h1 class="main-title">สีเสื้อมงคลประจำวัน</h1>
-  <p class="main-sub">ตามหลักโหราศาสตร์ไทย สีเสริมโชค · สีกาลกิณี</p>
+  <p class="main-sub">ตามหลักโหราศาสตร์ไทย · สีเสริมโชค · สีกาลกิณี</p>
 </div>
-
 <nav class="day-nav" id="dayNav" aria-label="เลือกวัน"></nav>
-
-<main class="content">
-  <article class="day-card" id="dayCard">
-    <div class="day-info-row">
-      <div class="planet-badge" id="planetBadge"></div>
-      <div>
-        <div class="day-name-big" id="dayNameBig"></div>
-        <div class="planet-name" id="planetName"></div>
-      </div>
+<div class="day-card">
+  <div class="day-info">
+    <div class="planet-badge" id="planetBadge"></div>
+    <div>
+      <div class="day-name" id="dayNameBig"></div>
+      <div class="planet-name" id="planetName"></div>
     </div>
-    <p class="day-desc" id="dayDesc"></p>
-
-    <div class="section-label">สีหลัก — เสริมโชคสูงสุด</div>
-    <div class="color-grid" id="primaryGrid"></div>
-
-    <div class="section-label">สีรอง — ใส่ได้ เสริมเมตตา</div>
-    <div class="color-grid" id="secondaryGrid"></div>
-
-    <hr class="divider">
-    <div class="section-label" style="color:#e05c5c;opacity:1">สีกาลกิณี — ควรหลีกเลี่ยง</div>
-    <div id="badGrid"></div>
-  </article>
-</main>
-
-<footer>
-  <p>คัมภีร์ดวง — ข้อมูลอ้างอิงตามหลักโหราศาสตร์ไทย เพื่อความบันเทิงเท่านั้น</p>
-</footer>
+  </div>
+  <p class="day-desc" id="dayDesc"></p>
+  <div class="sec-lbl">สีหลัก — เสริมโชคสูงสุด</div>
+  <div class="color-grid" id="primaryGrid"></div>
+  <div class="sec-lbl" id="secLbl">สีรอง — ใส่ได้ เสริมเมตตา</div>
+  <div class="color-grid" id="secondaryGrid"></div>
+  <div class="divider"></div>
+  <div class="sec-lbl" style="color:#e05c5c;opacity:1">สีกาลกิณี — ควรหลีกเลี่ยง</div>
+  <div id="badGrid"></div>
+</div>
+<!-- Internal Link -->
+<div id="pseoLink" style="display:none;padding:12px 16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:var(--r);text-align:center;margin-bottom:1rem">
+  <div style="font-size:13px;color:var(--text2);margin-bottom:8px">อ่านข้อมูลสีเสื้อมงคล<span id="pseoDay"></span>แบบละเอียด</div>
+  <a id="pseoBtn" href="#" style="display:inline-block;padding:8px 20px;background:var(--gold);color:#0d0d12;border-radius:20px;font-size:13px;font-weight:500">ดูข้อมูลเพิ่มเติม →</a>
+</div>
+<button class="share-btn" onclick="shr()">แชร์สีมงคลวันนี้ 🔗</button>
+</div>
+<footer><p>คัมภีร์ดวง — ข้อมูลอ้างอิงตามหลักโหราศาสตร์ไทย เพื่อความบันเทิงเท่านั้น</p></footer>
 
 <script>
 const DATA=[
-  {day:"Sunday",th:"วันอาทิตย์",planet:"พระอาทิตย์",short:"อา",
-   lucky:[{n:"เขียว",h:"#228B22",r:"primary",b:"เรียกโชคลาภ (ศรี)"},{n:"แดง",h:"#FF0000",r:"primary",b:"เสริมบารมี (เดช)"},{n:"ส้ม",h:"#FFA500",r:"primary",b:"เสริมอำนาจ"},{n:"ชมพู",h:"#FFC0CB",r:"secondary",b:"เสริมเมตตา"},{n:"ม่วง",h:"#800080",r:"secondary",b:"เสริมเมตตา"},{n:"เทา",h:"#808080",r:"secondary",b:"เสริมเมตตา"}],
+  {day:"Sunday",th:"วันอาทิตย์",planet:"พระอาทิตย์",
+   lucky:[{n:"เขียว",h:"#228B22",r:"p",b:"เรียกโชคลาภ (ศรี)"},{n:"แดง",h:"#FF0000",r:"p",b:"เสริมบารมี (เดช)"},{n:"ส้ม",h:"#FFA500",r:"p",b:"เสริมอำนาจ"},{n:"ชมพู",h:"#FFC0CB",r:"s",b:"เสริมเมตตา"},{n:"ม่วง",h:"#800080",r:"s",b:"เสริมเมตตา"},{n:"เทา",h:"#808080",r:"s",b:"เสริมเมตตา"}],
    bad:[{n:"น้ำเงิน",h:"#0000FF",reason:"ธาตุน้ำดับไฟแห่งดาวอาทิตย์ นำอุปสรรคและความขัดแย้ง"},{n:"ฟ้าเข้ม",h:"#00008B",reason:"พลังน้ำปะทะธาตุไฟ สกัดกั้นความรุ่งเรือง"}],
-   desc:"ดาวพระอาทิตย์ สร้างจากราชสีห์ 6 ตัว ห่อด้วยผ้าสีแดงสด มอบอานุภาพและความเป็นผู้นำ สีเขียวเรียกโชค (ศรี) สีแดงเสริมบารมี (เดช)"},
-  {day:"Monday",th:"วันจันทร์",planet:"พระจันทร์",short:"จ",
-   lucky:[{n:"ม่วง",h:"#800080",r:"primary",b:"เรียกโชคลาภ"},{n:"ส้ม",h:"#FFA500",r:"primary",b:"เสริมเงินทอง"},{n:"ทอง",h:"#FFD700",r:"primary",b:"เรียกทรัพย์"},{n:"เขียว",h:"#90EE90",r:"secondary",b:"เสริมเสน่ห์"},{n:"ฟ้า",h:"#ADD8E6",r:"secondary",b:"เสริมสุขภาพ"},{n:"ขาว",h:"#f5f5f0",r:"secondary",b:"ความบริสุทธิ์"},{n:"ครีม",h:"#FFFDD0",r:"secondary",b:"ความสงบ"}],
+   desc:"ดาวพระอาทิตย์ สร้างจากราชสีห์ 6 ตัว ห่อด้วยผ้าสีแดงสด มอบอานุภาพและความเป็นผู้นำ สีเขียวเรียกโชค (ศรี) สีแดงเสริมบารมี (เดช)",
+   slug:"วันอาทิตย์"},
+  {day:"Monday",th:"วันจันทร์",planet:"พระจันทร์",
+   lucky:[{n:"ม่วง",h:"#800080",r:"p",b:"เรียกโชคลาภ"},{n:"ส้ม",h:"#FFA500",r:"p",b:"เสริมเงินทอง"},{n:"ทอง",h:"#FFD700",r:"p",b:"เรียกทรัพย์"},{n:"เขียว",h:"#90EE90",r:"s",b:"เสริมเสน่ห์"},{n:"ฟ้า",h:"#ADD8E6",r:"s",b:"เสริมสุขภาพ"},{n:"ขาว",h:"#f5f5f0",r:"s",b:"ความบริสุทธิ์"},{n:"ครีม",h:"#FFFDD0",r:"s",b:"ความสงบ"}],
    bad:[{n:"แดง",h:"#FF0000",reason:"ธาตุไฟปะทะธาตุน้ำแห่งดวงจันทร์ ทำให้ขัดแย้งและร้อนใจ"}],
-   desc:"ดาวพระจันทร์ สร้างจากนางฟ้า 15 องค์ ห่อด้วยผ้าสีขาวนวล สัญลักษณ์ความอ่อนโยนและเมตตา สีม่วงช่วยดึงดูดโชคลาภ"},
-  {day:"Tuesday",th:"วันอังคาร",planet:"พระอังคาร",short:"อ",
-   lucky:[{n:"ส้ม",h:"#FF8C00",r:"primary",b:"เรียกโชคลาภ"},{n:"เทา",h:"#A9A9A9",r:"primary",b:"เสริมการงาน"},{n:"เงิน",h:"#C0C0C0",r:"primary",b:"เสริมการงาน"},{n:"ม่วง",h:"#8A2BE2",r:"secondary",b:"เสริมอำนาจ"},{n:"ชมพู",h:"#FF69B4",r:"secondary",b:"เสริมเมตตา"},{n:"แดง",h:"#DC143C",r:"secondary",b:"เสริมบารมี"}],
+   desc:"ดาวพระจันทร์ สร้างจากนางฟ้า 15 องค์ ห่อด้วยผ้าสีขาวนวล สัญลักษณ์ความอ่อนโยนและเมตตา สีม่วงช่วยดึงดูดโชคลาภ",
+   slug:"วันจันทร์"},
+  {day:"Tuesday",th:"วันอังคาร",planet:"พระอังคาร",
+   lucky:[{n:"ส้ม",h:"#FF8C00",r:"p",b:"เรียกโชคลาภ"},{n:"เทา",h:"#A9A9A9",r:"p",b:"เสริมการงาน"},{n:"เงิน",h:"#C0C0C0",r:"p",b:"เสริมการงาน"},{n:"ม่วง",h:"#8A2BE2",r:"s",b:"เสริมอำนาจ"},{n:"ชมพู",h:"#FF69B4",r:"s",b:"เสริมเมตตา"},{n:"แดง",h:"#DC143C",r:"s",b:"เสริมบารมี"}],
    bad:[{n:"ขาว",h:"#dddddd",reason:"ลดพลังความเด็ดขาด ทำให้ลังเล"},{n:"เหลือง",h:"#FFFF00",reason:"อริทางทักษา ทำให้เกิดความลังเล"}],
-   desc:"ดาวพระอังคาร สร้างจากกระบือ 8 ตัว ห่อด้วยผ้าสีชมพูหม่น พลังแห่งการแข่งขันและความแข็งแกร่ง สีส้มเรียกโชค"},
-  {day:"Wednesday",th:"วันพุธ",planet:"พระพุธ (กลางวัน)",short:"พ",
-   lucky:[{n:"เทา",h:"#808080",r:"primary",b:"ดึงดูดความน่าเชื่อถือ"},{n:"ดำ",h:"#333333",r:"primary",b:"เสริมการงาน"},{n:"ฟ้า",h:"#00BFFF",r:"primary",b:"เรียกโชค"},{n:"ส้ม",h:"#FFA500",r:"secondary",b:"เสริมการงาน"},{n:"เหลือง",h:"#FFD700",r:"secondary",b:"เสริมการงาน"},{n:"เขียว",h:"#2E8B57",r:"secondary",b:"เสริมการงาน"}],
+   desc:"ดาวพระอังคาร สร้างจากกระบือ 8 ตัว ห่อด้วยผ้าสีชมพูหม่น พลังแห่งการแข่งขันและความแข็งแกร่ง สีส้มเรียกโชค",
+   slug:"วันอังคาร"},
+  {day:"Wednesday",th:"วันพุธ",planet:"พระพุธ (กลางวัน)",
+   lucky:[{n:"เทา",h:"#808080",r:"p",b:"ดึงดูดความน่าเชื่อถือ"},{n:"ดำ",h:"#333333",r:"p",b:"เสริมการงาน"},{n:"ฟ้า",h:"#00BFFF",r:"p",b:"เรียกโชค"},{n:"ส้ม",h:"#FFA500",r:"s",b:"เสริมการงาน"},{n:"เหลือง",h:"#FFD700",r:"s",b:"เสริมการงาน"},{n:"เขียว",h:"#2E8B57",r:"s",b:"เสริมการงาน"}],
    bad:[{n:"ชมพู",h:"#FF69B4",reason:"พลังอารมณ์ทำลายตรรกะดาวพุธ"},{n:"แดง",h:"#FF0000",reason:"ความร้อนรุ่มขัดขวางการเจรจา"}],
-   desc:"ดาวพระพุธ สร้างจากช้าง 17 เชือก ห่อด้วยผ้าสีเขียว โดดเด่นด้านปัญญาและการค้า สีเทาดำเสริมความน่าเชื่อถือ"},
-  {day:"Thursday",th:"วันพฤหัสบดี",planet:"พระพฤหัสบดี",short:"ห",
-   lucky:[{n:"แดง",h:"#FF0000",r:"primary",b:"ดึงดูดโชคลาภ (ศรี)"},{n:"เหลือง",h:"#FFD700",r:"primary",b:"เสริมบารมี"},{n:"ทอง",h:"#DAA520",r:"primary",b:"เสริมความมั่นคง"},{n:"ขาว",h:"#f5f5f0",r:"primary",b:"เสริมความมั่นคง"},{n:"ฟ้า",h:"#1E90FF",r:"secondary",b:"สนับสนุนการงาน"},{n:"เขียว",h:"#2E8B57",r:"secondary",b:"สนับสนุนการงาน"}],
+   desc:"ดาวพระพุธ สร้างจากช้าง 17 เชือก ห่อด้วยผ้าสีเขียว โดดเด่นด้านปัญญาและการค้า สีเทาดำเสริมความน่าเชื่อถือ",
+   slug:"วันพุธ (กลางวัน)"},
+  {day:"Thursday",th:"วันพฤหัสบดี",planet:"พระพฤหัสบดี",
+   lucky:[{n:"แดง",h:"#FF0000",r:"p",b:"ดึงดูดโชคลาภ (ศรี)"},{n:"เหลือง",h:"#FFD700",r:"p",b:"เสริมบารมี"},{n:"ทอง",h:"#DAA520",r:"p",b:"เสริมความมั่นคง"},{n:"ขาว",h:"#f5f5f0",r:"p",b:"เสริมความมั่นคง"},{n:"ฟ้า",h:"#1E90FF",r:"s",b:"สนับสนุนการงาน"},{n:"เขียว",h:"#2E8B57",r:"s",b:"สนับสนุนการงาน"}],
    bad:[{n:"ดำ",h:"#222222",reason:"พลังมืดขัดแย้งกับปัญญาและความสว่าง"},{n:"ม่วง",h:"#800080",reason:"ทำให้ชีวิตติดขัดและอับโชค"}],
-   desc:"ดาวพระพฤหัสบดี สร้างจากฤๅษี 19 ตน ห่อด้วยผ้าสีส้มแดง ตัวแทนครูบาอาจารย์และเสถียรภาพ สีแดงเรียกโชคทรงพลัง"},
-  {day:"Friday",th:"วันศุกร์",planet:"พระศุกร์",short:"ศ",
-   lucky:[{n:"ฟ้า",h:"#87CEFA",r:"primary",b:"เรียกโชค เสน่ห์"},{n:"น้ำเงิน",h:"#0000CD",r:"primary",b:"เรียกโชค เสน่ห์"},{n:"ชมพู",h:"#FF69B4",r:"primary",b:"เสริมความรัก"},{n:"เขียว",h:"#3CB371",r:"secondary",b:"ความสบายใจ"},{n:"เหลือง",h:"#FFD700",r:"secondary",b:"ความสบายใจ"}],
+   desc:"ดาวพระพฤหัสบดี สร้างจากฤๅษี 19 ตน ห่อด้วยผ้าสีส้มแดง ตัวแทนครูบาอาจารย์และเสถียรภาพ สีแดงเรียกโชคทรงพลัง",
+   slug:"วันพฤหัสบดี"},
+  {day:"Friday",th:"วันศุกร์",planet:"พระศุกร์",
+   lucky:[{n:"ฟ้า",h:"#87CEFA",r:"p",b:"เรียกโชค เสน่ห์"},{n:"น้ำเงิน",h:"#0000CD",r:"p",b:"เรียกโชค เสน่ห์"},{n:"ชมพู",h:"#FF69B4",r:"p",b:"เสริมความรัก"},{n:"เขียว",h:"#3CB371",r:"s",b:"ความสบายใจ"},{n:"เหลือง",h:"#FFD700",r:"s",b:"ความสบายใจ"}],
    bad:[{n:"เทา",h:"#808080",reason:"บดบังประกายดาวศุกร์ ทำให้หม่นหมองสูญเสียทรัพย์"},{n:"ดำ",h:"#333333",reason:"ความมืดทึบบดบังความสดใสของดาวศุกร์"}],
-   desc:"ดาวพระศุกร์ สร้างจากโค 21 ตัว ห่อด้วยผ้าสีฟ้าอ่อน เทพแห่งศิลปะ ความรัก สุนทรียภาพ สีฟ้าน้ำเงินชมพูเรียกทรัพย์"},
-  {day:"Saturday",th:"วันเสาร์",planet:"พระเสาร์",short:"ส",
-   lucky:[{n:"ฟ้า",h:"#00BFFF",r:"primary",b:"เสริมโชคลาภ"},{n:"น้ำเงิน",h:"#000080",r:"primary",b:"เสริมโชคลาภ"},{n:"แดง",h:"#B22222",r:"primary",b:"เสริมความรวย"},{n:"ชมพู",h:"#FFB6C1",r:"secondary",b:"เสริมบารมี"},{n:"ดำ",h:"#333333",r:"secondary",b:"เสริมบารมี"},{n:"ม่วงเข้ม",h:"#4B0082",r:"secondary",b:"เสริมบารมี"}],
+   desc:"ดาวพระศุกร์ สร้างจากโค 21 ตัว ห่อด้วยผ้าสีฟ้าอ่อน เทพแห่งศิลปะ ความรัก สุนทรียภาพ สีฟ้าน้ำเงินชมพูเรียกทรัพย์",
+   slug:"วันศุกร์"},
+  {day:"Saturday",th:"วันเสาร์",planet:"พระเสาร์",
+   lucky:[{n:"ฟ้า",h:"#00BFFF",r:"p",b:"เสริมโชคลาภ"},{n:"น้ำเงิน",h:"#000080",r:"p",b:"เสริมโชคลาภ"},{n:"แดง",h:"#B22222",r:"p",b:"เสริมความรวย"},{n:"ชมพู",h:"#FFB6C1",r:"s",b:"เสริมบารมี"},{n:"ดำ",h:"#333333",r:"s",b:"เสริมบารมี"},{n:"ม่วงเข้ม",h:"#4B0082",r:"s",b:"เสริมบารมี"}],
    bad:[{n:"เขียว",h:"#008000",reason:"ธาตุไม้เป็นศัตรูกับดาวเสาร์ ทำให้ปัญหาขัดแย้งและสุขภาพเสีย"}],
-   desc:"ดาวพระเสาร์ สร้างจากเสือ 10 ตัว ห่อด้วยผ้าสีดำ สัญลักษณ์ความอดทนและภาระ สีฟ้าน้ำเงินแดงเสริมโชค"},
+   desc:"ดาวพระเสาร์ สร้างจากเสือ 10 ตัว ห่อด้วยผ้าสีดำ สัญลักษณ์ความอดทนและภาระ สีฟ้าน้ำเงินแดงเสริมโชค",
+   slug:"วันเสาร์"},
 ];
 const ORDER=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const today=ORDER[new Date().getDay()];
 let current=today;
 
-function isLight(h){const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return(r*299+g*587+b*114)/1000>160;}
-
-function renderNav(){
-  document.getElementById('dayNav').innerHTML=DATA.map(d=>`
-    <button class="day-btn${d.day===current?' active':''}" onclick="setCurrent('${d.day}')">
-      ${d.th.replace('วัน','')}${d.day===today?'<span class="today-tag">วันนี้</span>':''}
-    </button>`).join('');
-}
-
-function makeColorCard(c){
-  const light=isLight(c.h);
-  const bg=c.h==='#f5f5f0'||c.h==='#FFFDD0'||c.h==='#dddddd'?'border-bottom:1px solid rgba(0,0,0,0.08)':'';
-  return `<div class="color-card">
-    <div class="color-swatch" style="background:${c.h};${bg}"></div>
-    <div class="color-info">
-      <div class="role-badge ${c.r==='primary'?'role-primary':'role-secondary'}">${c.r==='primary'?'หลัก':'รอง'}</div>
-      <div class="color-name">${c.n}</div>
-      <div class="color-hex">${c.h}</div>
-      <div class="color-benefit">${c.b}</div>
-    </div>
-  </div>`;
-}
-
 function render(){
   const d=DATA.find(x=>x.day===current);
-  document.title=`สีเสื้อมงคล ${d.th} — คัมภีร์ดวง`;
+  // Nav
+  document.getElementById('dayNav').innerHTML=DATA.map(d2=>`<button class="day-btn${d2.day===current?' active':''}" onclick="setCurrent('${d2.day}')">${d2.th.replace('วัน','')}${d2.day===today?'<span class="today-tag">วันนี้</span>':''}</button>`).join('');
+  // Card
   document.getElementById('planetBadge').textContent=d.planet.replace('พระ','');
   document.getElementById('dayNameBig').innerHTML=d.th+(current===today?'<span class="today-tag">วันนี้</span>':'');
   document.getElementById('planetName').textContent='ดาวประจำวัน: '+d.planet;
   document.getElementById('dayDesc').textContent=d.desc;
-  document.getElementById('primaryGrid').innerHTML=d.lucky.filter(c=>c.r==='primary').map(makeColorCard).join('');
-  document.getElementById('secondaryGrid').innerHTML=d.lucky.filter(c=>c.r==='secondary').map(makeColorCard).join('');
-  document.getElementById('badGrid').innerHTML=d.bad.map(c=>`
-    <div class="bad-card">
-      <div class="bad-swatch" style="background:${c.h}"></div>
-      <div>
-        <div class="bad-name">${c.n}</div>
-        <div class="bad-reason">${c.reason}</div>
-      </div>
-    </div>`).join('');
-  renderNav();
+  // Colors
+  const mkCard=c=>`<div class="color-card"><div class="color-swatch" style="background:${c.h}${c.h==='#f5f5f0'||c.h==='#FFFDD0'?';border-bottom:1px solid rgba(0,0,0,.08)':''}"></div><div class="color-info"><div class="role-badge ${c.r==='p'?'role-p':'role-s'}">${c.r==='p'?'หลัก':'รอง'}</div><div class="color-name">${c.n}</div><div class="color-hex">${c.h}</div><div class="color-benefit">${c.b}</div></div></div>`;
+  document.getElementById('primaryGrid').innerHTML=d.lucky.filter(c=>c.r==='p').map(mkCard).join('');
+  document.getElementById('secondaryGrid').innerHTML=d.lucky.filter(c=>c.r==='s').map(mkCard).join('');
+  document.getElementById('badGrid').innerHTML=d.bad.map(c=>`<div class="bad-card"><div class="bad-swatch" style="background:${c.h}"></div><div><div class="bad-name">${c.n}</div><div class="bad-reason">${c.reason}</div></div></div>`).join('');
+  // Internal link
+  const pseo=document.getElementById('pseoLink');
+  document.getElementById('pseoDay').textContent=d.th;
+  document.getElementById('pseoBtn').href='/สีเสื้อมงคล/'+d.slug+'/';
+  pseo.style.display='block';
 }
 
 function setCurrent(day){current=day;render();}
+
+function shr(){
+  const d=DATA.find(x=>x.day===current);
+  const colors=d.lucky.filter(c=>c.r==='p').map(c=>c.n).join(', ');
+  const text=`🎨 สีเสื้อมงคล${d.th}\nสีมงคล: ${colors}\nสีกาลกิณี: ${d.bad.map(c=>c.n).join(', ')}\n\n${d.desc.slice(0,60)}...`;
+  const url='https://kambheerduang.com/สีเสื้อมงคล/tool.html';
+  if(navigator.share){navigator.share({title:'สีเสื้อมงคล'+d.th+' — คัมภีร์ดวง',text,url});}
+  else{navigator.clipboard&&navigator.clipboard.writeText(text+'\n'+url).then(()=>alert('คัดลอกแล้ว วางใน LINE ได้เลย'));}
+}
+
 render();
 </script>
 </body>
