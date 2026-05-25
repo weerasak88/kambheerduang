@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิเคราะห์เบอร์โทรมงคล — คัมภีร์ดวง</title>
+<meta name="description" content="วิเคราะห์เบอร์โทรศัพท์ตามหลักเลขศาสตร์ไทย คู่อันดับ 6 คู่ Rarity Score ผลรวม และความหมายเบอร์โทร">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600&family=Sarabun:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e1a;--surface:#111623;--surface2:#181f30;--border:rgba(255,255,255,0.07);--text:#eaeef8;--text2:#8892a4;--accent:#4f8ef7;--accent2:#7eb3ff;--gold:#e8c97a;--radius:14px;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;min-height:100vh}
+.header{text-align:center;padding:2.5rem 1.5rem 1.5rem;background:linear-gradient(180deg,rgba(79,142,247,0.08) 0%,transparent 100%)}
+.site-name{font-size:11px;letter-spacing:3px;color:var(--accent);margin-bottom:10px;opacity:.8}
+.main-title{font-family:'Noto Serif Thai',serif;font-size:clamp(22px,5vw,32px);font-weight:600;margin-bottom:6px}
+.main-sub{font-size:13px;color:var(--text2)}
+.container{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+
+/* INPUT */
+.input-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+.input-row{display:flex;gap:10px}
+.phone-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:24px;font-family:var(--mono);color:var(--text);letter-spacing:4px;text-align:center}
+.phone-input:focus{outline:none;border-color:var(--accent)}
+.go-btn{padding:12px 20px;background:var(--accent);border:none;border-radius:10px;color:#fff;font-family:'Sarabun',sans-serif;font-size:14px;cursor:pointer;white-space:nowrap;font-weight:500}
+.go-btn:hover{background:var(--accent2);color:#0a0e1a}
+.hint{font-size:12px;color:var(--text2);text-align:center;margin-top:10px}
+.err{font-size:12px;color:#e05c5c;text-align:center;margin-top:8px;display:none}
+.result{display:none}
+
+/* RARITY */
+.rarity-banner{border-radius:var(--radius);padding:1.5rem;text-align:center;margin-bottom:1rem;border:1px solid var(--border);background:var(--surface)}
+.r-tier{font-size:11px;font-weight:500;letter-spacing:1px;margin-bottom:5px}
+.r-label{font-size:26px;font-weight:600;margin-bottom:5px}
+.r-pct{font-size:13px;color:var(--text2)}
+.r-bar-bg{height:5px;background:rgba(255,255,255,0.06);border-radius:3px;margin:12px 0 3px;overflow:hidden}
+.r-bar{height:5px;border-radius:3px;transition:width 1s ease}
+.score-split{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.score-half{padding:12px 16px;text-align:center}
+.score-half:first-child{border-right:1px solid var(--border)}
+.sh-lbl{font-size:11px;color:var(--text2);margin-bottom:4px}
+.sh-val{font-size:20px;font-weight:500}
+.sh-sub{font-size:11px;margin-top:3px}
+.sh-bar{height:3px;border-radius:2px;margin-top:8px;transition:width .9s ease}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 8px;text-align:center}
+.stat-l{font-size:11px;color:var(--text2);margin-bottom:3px}
+.stat-v{font-size:20px;font-weight:500}
+.stat-s{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* DIGITS */
+.sec{font-size:12px;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin:1.25rem 0 10px;opacity:.8}
+.digit-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.chip{width:36px;height:36px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;font-family:var(--mono);background:var(--surface);color:var(--text)}
+.chip.sep{background:transparent;border-color:transparent;font-size:13px;color:var(--text2)}
+.calc-note{font-size:12px;color:var(--text2);text-align:center;font-family:var(--mono)}
+
+/* PAIRS */
+.pair-summary{font-size:13px;color:var(--text2);text-align:center;margin-bottom:10px}
+.pairs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.5rem}
+.pair-card{border-radius:10px;border:1px solid var(--border);padding:10px 8px;background:var(--surface)}
+.pair-num{font-size:20px;font-weight:500;font-family:var(--mono);margin-bottom:3px}
+.pair-stars{font-size:10px;color:var(--text2);margin-bottom:4px}
+.pair-meaning{font-size:11px;line-height:1.45;color:var(--text2)}
+.pair-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:500;margin-top:4px}
+.good{color:#4ade80;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.2)}
+.neutral{color:#fbbf24;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2)}
+.bad{color:#f87171;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2)}
+.danger{color:#ff4444;background:rgba(255,68,68,0.12);border:1px solid rgba(255,68,68,0.3);font-weight:600}
+.good-border{border-color:rgba(74,222,128,0.25)}
+.neutral-border{border-color:rgba(251,191,36,0.2)}
+.bad-border{border-color:rgba(248,113,113,0.2)}
+.danger-border{border-color:rgba(255,68,68,0.3)}
+
+/* PLANETS */
+.planet-bars{display:flex;flex-direction:column;gap:6px}
+.pb-row{display:flex;align-items:center;gap:8px}
+.pb-name{font-size:12px;color:var(--text2);width:72px;flex-shrink:0}
+.pb-bg{flex:1;height:7px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.pb-fill{height:7px;border-radius:4px;background:var(--accent);transition:width .7s ease}
+.pb-cnt{font-size:11px;color:var(--text2);width:18px;text-align:right}
+
+/* MEANING */
+.meaning-box{padding:14px 16px;background:var(--surface);border-radius:var(--radius);font-size:13px;line-height:1.75;border-left:3px solid var(--accent);color:var(--text);margin-bottom:1rem}
+.m-lbl{font-size:11px;color:var(--text2);margin-bottom:6px}
+.fbadge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500;margin-left:6px;vertical-align:middle}
+.f-good{background:rgba(74,222,128,0.12);color:#4ade80}
+.f-bad{background:rgba(248,113,113,0.1);color:#f87171}
+.f-neutral{background:rgba(251,191,36,0.1);color:#fbbf24}
+
+.share-btn{width:100%;padding:11px;border:1px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--text);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;margin-top:.5rem}
+.share-btn:hover{background:var(--surface)}
+footer{text-align:center;padding:2rem;font-size:12px;color:var(--text2);border-top:1px solid var(--border);opacity:.5}
+@media(max-width:400px){.pairs-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="site-name">คัมภีร์ดวง</div>
+  <h1 class="main-title">วิเคราะห์เบอร์โทรมงคล</h1>
+  <p class="main-sub">คู่อันดับ 6 คู่ · Rarity Score · ผลรวมเลขศาสตร์</p>
+</div>
+
+<div class="container">
+  <div class="input-card">
+    <div class="input-row">
+      <input class="phone-input" id="ph" type="tel" maxlength="10" placeholder="0812345678" inputmode="numeric">
+      <button class="go-btn" onclick="run()">วิเคราะห์ ↗</button>
+    </div>
+    <p class="hint">คะแนนรวม = คู่อันดับ 80% + ผลรวม 20% · นับ 0 นำหน้าด้วย</p>
+    <div class="err" id="err">กรุณากรอกเบอร์โทร 10 หลักให้ครบถ้วน</div>
+  </div>
+
+  <div class="result" id="result">
+    <div class="rarity-banner" id="rb">
+      <div class="r-tier" id="rTier"></div>
+      <div class="r-label" id="rLabel"></div>
+      <div class="r-pct" id="rPct"></div>
+      <div class="r-bar-bg"><div class="r-bar" id="rBar"></div></div>
+      <div class="score-split">
+        <div class="score-half">
+          <div class="sh-lbl">คู่อันดับ (80%)</div>
+          <div class="sh-val" id="pScore"></div>
+          <div class="sh-sub" id="pSub"></div>
+          <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;margin-top:8px;overflow:hidden"><div id="pBar" style="height:3px;border-radius:2px;transition:width .9s ease"></div></div>
+        </div>
+        <div class="score-half">
+          <div class="sh-lbl">ผลรวม (20%)</div>
+          <div class="sh-val" id="sScore"></div>
+          <div class="sh-sub" id="sSub"></div>
+          <div style="background:rgba(255,255,255,.06);height:3px;border-radius:2px;margin-top:8px;overflow:hidden"><div id="sBar2" style="height:3px;border-radius:2px;transition:width .9s ease"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-l">ผลรวม 10 หลัก</div><div class="stat-v" id="stSum"></div><div class="stat-s">รวม 0 นำหน้า</div></div>
+      <div class="stat"><div class="stat-l">คู่มงคล</div><div class="stat-v" id="stGood"></div><div class="stat-s">จาก 6 คู่</div></div>
+      <div class="stat"><div class="stat-l">ดาวคุมเบอร์</div><div class="stat-v" id="stPlanet" style="font-size:14px;padding-top:3px"></div><div class="stat-s" id="stPSub"></div></div>
+    </div>
+
+    <div class="sec">การคำนวณ</div>
+    <div class="digit-row" id="dRow"></div>
+    <div class="calc-note" id="calcNote"></div>
+
+    <div class="sec">คู่อันดับ 6 คู่ — หัวใจสำคัญ 80%</div>
+    <div class="pair-summary" id="pSum"></div>
+    <div class="pairs-grid" id="pGrid"></div>
+
+    <div class="sec">ดาวประจำตัวเลข (7 หลักท้าย)</div>
+    <div class="planet-bars" id="pBars"></div>
+
+    <div class="sec" style="margin-top:1.25rem">ความหมายผลรวม</div>
+    <div class="meaning-box">
+      <div class="m-lbl" id="mLbl"></div>
+      <div id="mTxt"></div>
+    </div>
+
+    <button class="share-btn" onclick="shr()">คัดลอกผลวิเคราะห์แชร์ใน LINE ↗</button>
+  </div>
+</div>
+
+<footer><p>คัมภีร์ดวง — ข้อมูลอ้างอิงตามหลักโหราศาสตร์ไทย เพื่อความบันเทิงเท่านั้น</p></footer>
+
+<script>
+const PL={0:"มฤตยู",1:"อาทิตย์",2:"จันทร์",3:"อังคาร",4:"พุธ",5:"พฤหัสฯ",6:"ศุกร์",7:"เสาร์",8:"ราหู",9:"เกตุ"};
+const PAIRS={"15":{g:"good",m:"ผู้ใหญ่เมตตา สติปัญญาเยี่ยม การงานก้าวหน้า"},"51":{g:"good",m:"ผู้ใหญ่เมตตา สติปัญญาเยี่ยม การงานก้าวหน้า"},"45":{g:"good",m:"ปัญญาเฉียบแหลม มีความสำเร็จ ผู้ใหญ่อุปถัมภ์"},"54":{g:"good",m:"ปัญญาเฉียบแหลม มีความสำเร็จ ผู้ใหญ่อุปถัมภ์"},"19":{g:"good",m:"โดดเด่น มีวิสัยทัศน์ สิ่งศักดิ์สิทธิ์คุ้มครอง"},"91":{g:"good",m:"โดดเด่น มีวิสัยทัศน์ สิ่งศักดิ์สิทธิ์คุ้มครอง"},"59":{g:"good",m:"ปัญญา+ศักดิ์สิทธิ์ แคล้วคลาด วิสัยทัศน์ล้ำสมัย"},"95":{g:"good",m:"ปัญญา+ศักดิ์สิทธิ์ แคล้วคลาด วิสัยทัศน์ล้ำสมัย"},"99":{g:"good",m:"เกตุซ้ำ สิ่งศักดิ์สิทธิ์คุ้มครองสูงสุด โชคลาภ"},"56":{g:"good",m:"ทรัพย์สมบัติ ปัญญาหาเงิน ชีวิตอุดมสมบูรณ์"},"65":{g:"good",m:"ทรัพย์สมบัติ ปัญญาหาเงิน ชีวิตอุดมสมบูรณ์"},"24":{g:"good",m:"เมตตามหานิยม โชคลาภการเจรจา มีคนช่วยเหลือ"},"42":{g:"good",m:"เมตตามหานิยม โชคลาภการเจรจา มีคนช่วยเหลือ"},"36":{g:"good",m:"เสน่ห์แรงสุด รักและการเงินดี ค้าขายสำเร็จ"},"63":{g:"good",m:"เสน่ห์แรงสุด รักและการเงินดี ค้าขายสำเร็จ"},"23":{g:"good",m:"มหาเสน่ห์ ดึงดูดผู้คนและการเงิน"},"32":{g:"good",m:"มหาเสน่ห์ ดึงดูดผู้คนและการเงิน"},"22":{g:"good",m:"จันทร์ซ้ำ เสน่ห์สูง อ่อนหวาน มีคนเมตตา"},"28":{g:"good",m:"มังกรโภคทรัพย์ หมุนเงินเก่ง นักลงทุนเก่ง"},"82":{g:"good",m:"มังกรโภคทรัพย์ หมุนเงินเก่ง นักลงทุนเก่ง"},"14":{g:"good",m:"ผู้นำ+ปัญญา มีตำแหน่งก้าวหน้า น่าเชื่อถือ"},"41":{g:"good",m:"ผู้นำ+ปัญญา มีตำแหน่งก้าวหน้า น่าเชื่อถือ"},"55":{g:"good",m:"พฤหัสบดีซ้ำ ปัญญา คุณธรรม ผู้อุปถัมภ์ล้อมรอบ"},"29":{g:"good",m:"เสน่ห์+ศักดิ์สิทธิ์ มีคนช่วยเหลือ แคล้วคลาด"},"92":{g:"good",m:"เสน่ห์+ศักดิ์สิทธิ์ มีคนช่วยเหลือ แคล้วคลาด"},"46":{g:"good",m:"ปัญญา+ศิลปะ ค้าขายสร้างสรรค์ มีรสนิยม"},"64":{g:"good",m:"ปัญญา+ศิลปะ ค้าขายสร้างสรรค์ มีรสนิยม"},"49":{g:"good",m:"ปัญญา+เกตุ ทันสมัย นวัตกรรม งานต่างประเทศ"},"94":{g:"good",m:"ปัญญา+เกตุ ทันสมัย นวัตกรรม งานต่างประเทศ"},"78":{g:"good",m:"อดทน+กล้าเสี่ยง สร้างฐานะได้ในระยะยาว"},"87":{g:"good",m:"อดทน+กล้าเสี่ยง สร้างฐานะได้ในระยะยาว"},"66":{g:"neutral",m:"ศุกร์ซ้ำ ชอบความสุขสบาย อาจฟุ่มเฟือย"},"11":{g:"neutral",m:"อาทิตย์ซ้ำ มั่นใจสูง ระวังหยิ่งทะนง"},"44":{g:"neutral",m:"พุธซ้ำ พูดเก่ง ระวังพูดมากเกินไป"},"33":{g:"neutral",m:"อังคารซ้ำ กล้าหาญ ระวังใจร้อน"},"88":{g:"neutral",m:"ราหูซ้ำ กล้าเสี่ยงสูง อาจมัวเมา"},"58":{g:"neutral",m:"มีความสำเร็จแต่ระวังถูกหลอก"},"85":{g:"neutral",m:"มีความสำเร็จแต่ระวังถูกหลอก"},"48":{g:"neutral",m:"ฉลาดแต่ระวังเล่ห์เหลี่ยม"},"84":{g:"neutral",m:"ฉลาดแต่ระวังเล่ห์เหลี่ยม"},"12":{g:"neutral",m:"มีเสน่ห์ แต่อาจลังเลบ้าง"},"21":{g:"neutral",m:"มีเสน่ห์ แต่อาจลังเลบ้าง"},"00":{g:"danger",m:"มฤตยูซ้อน โรคร้ายหาสาเหตุยาก ความเครียดสะสม"},"13":{g:"danger",m:"อุบัติเหตุรุนแรง รถชน ผ่าตัด อารมณ์ร้อน"},"31":{g:"danger",m:"อุบัติเหตุรุนแรง รถชน ผ่าตัด อารมณ์ร้อน"},"37":{g:"danger",m:"คู่แตกหัก อุปสรรคถาโถม เหนื่อยยากตลอดชีวิต"},"73":{g:"danger",m:"คู่แตกหัก อุปสรรคถาโถม เหนื่อยยากตลอดชีวิต"},"18":{g:"danger",m:"เผด็จการ บ้าอำนาจ ถูกหักหลัง คดีความ"},"81":{g:"danger",m:"เผด็จการ บ้าอำนาจ ถูกหักหลัง คดีความ"},"02":{g:"bad",m:"เงินรั่วไหล ตกรักซ้อน/มือที่สาม"},"20":{g:"bad",m:"เงินรั่วไหล ตกรักซ้อน/มือที่สาม"},"03":{g:"bad",m:"อุบัติเหตุ ไฟไหม้ การผ่าตัดกะทันหัน"},"30":{g:"bad",m:"อุบัติเหตุ ไฟไหม้ การผ่าตัดกะทันหัน"},"04":{g:"bad",m:"สื่อสารผิดพลาด เจรจาล้มเหลว"},"40":{g:"bad",m:"สื่อสารผิดพลาด เจรจาล้มเหลว"},"07":{g:"bad",m:"ภาระหนักมาก เหน็ดเหนื่อยไม่สิ้นสุด"},"70":{g:"bad",m:"ภาระหนักมาก เหน็ดเหนื่อยไม่สิ้นสุด"},"17":{g:"bad",m:"เครียดสะสม บ้าพลัง จริงจังเกิน ขาดบริวาร"},"71":{g:"bad",m:"เครียดสะสม บ้าพลัง จริงจังเกิน ขาดบริวาร"},"27":{g:"bad",m:"หนี้สินพอกพูน เก็บเงินไม่อยู่ ความรักร้าวฉาน"},"72":{g:"bad",m:"หนี้สินพอกพูน เก็บเงินไม่อยู่ ความรักร้าวฉาน"},"43":{g:"bad",m:"ปากไว ก่อศัตรูเพราะคำพูด อาจพัวพันคดีความ"},"34":{g:"bad",m:"ปากไว ก่อศัตรูเพราะคำพูด อาจพัวพันคดีความ"},"67":{g:"bad",m:"การเงินฝืดเคือง รักมีอุปสรรค"},"76":{g:"bad",m:"การเงินฝืดเคือง รักมีอุปสรรค"}};
+const GOOD_S=[14,15,19,24,29,32,36,39,41,42,45,46,50,51,54,55,56,59,60,63,64,65,69];
+const BAD_S=[7,8,11,12,18,20,21,22,26,27,30,37,38,43,47,48,57,58,61,62,66,67,68,70,71,72,73,74];
+const MEANINGS={14:"สติปัญญาและมงคล ฉลาด มีตำแหน่งก้าวไกล ผู้คนเคารพนับถือ",15:"มีผู้ใหญ่อุปถัมภ์ เสน่ห์แรง พูดจาดึงดูดใจ ชีวิตสมหวัง",19:"ความสำเร็จอันยิ่งใหญ่ ผู้ใหญ่อุปถัมภ์ค้ำชู โดดเด่น มีชื่อเสียงเกียรติยศ",24:"สมบูรณ์สุข มหามงคล มีเสน่ห์ วาทศิลป์เป็นเลิศ โชคการเงินดีมาก",36:"ส่งผลดีทั้งการงานและความรัก เจรจาราบรื่น ค้าขายสำเร็จ",41:"ความสำเร็จ มีชื่อเสียง สติปัญญาดีเลิศ ได้รับอุปถัมภ์จากผู้ใหญ่",42:"ดวงอุปถัมภ์ เป็นที่รักและเคารพ มีโชคการเงิน มิตรสหายเกื้อหนุน",45:"เทพีแห่งโชค ปัญญาและความเจริญ โชคลาภไม่คาดฝัน การงานมั่นคง",54:"พลังมหาราชาโชค สำเร็จสมปรารถนาทุกเรื่อง ตำแหน่งสูง ไม่มีวันตกต่ำ",55:"พลังแห่งปัญญาและบารมี มั่นคง รักความยุติธรรม ชีวิตสงบสุข",59:"ยอดแห่งรหัสชีวิต สำเร็จอย่างดียิ่ง รุ่งเรือง โอกาสต่างประเทศสูง",65:"คู่ทรัพย์คู่โชค ราบรื่นเจริญก้าวหน้า หาเงินเก่ง ความรักอบอุ่น",38:"ใจร้อน วู่วาม เชื่อคนง่าย มักตัดสินใจผิดพลาด",43:"ทุกข์ใจง่าย มีศัตรูแอบแฝง ต้องต่อสู้อุปสรรคเหน็ดเหนื่อย"};
+const TIERS=[{min:85,label:"🏆 LEGENDARY",pct:"Top 0.5%",c:"#e8c97a",bar:"#FFD700"},{min:70,label:"⚡ EPIC",pct:"Top 5%",c:"#a78bfa",bar:"#8b5cf6"},{min:50,label:"💎 RARE",pct:"Top 20%",c:"#4f8ef7",bar:"#3b82f6"},{min:0,label:"⚪ COMMON",pct:"ทั่วไป",c:"#6b7280",bar:"#4b5563"}];
+const PAIRS_LABELS={good:"มงคล",neutral:"กลาง",bad:"ระวัง",danger:"⚠ อันตราย"};
+const BORDER_CLS={good:"good-border",neutral:"neutral-border",bad:"bad-border",danger:"danger-border"};
+
+function pInfo(p){return PAIRS[p]||{g:"neutral",m:"พลังงานปกติ"};}
+function sumScore(s){if(GOOD_S.includes(s))return 80;if(BAD_S.includes(s))return 20;return 50;}
+function pairsScore(pairs){let s=50;pairs.forEach(p=>{const g=pInfo(p).g;if(g==='good')s+=10;else if(g==='bad')s-=8;else if(g==='danger')s-=18;});return Math.min(100,Math.max(0,s));}
+function combined(ps,ss){return Math.round(ps*0.8+ss*0.2);}
+function rd(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);return n;}
+
+function run(){
+  const raw=document.getElementById('ph').value.replace(/\D/g,'');
+  document.getElementById('err').style.display=raw.length!==10?'block':'none';
+  if(raw.length!==10)return;
+  document.getElementById('result').style.display='block';
+  const digs=raw.split('').map(Number);
+  const rawSum=digs.reduce((a,b)=>a+b,0);
+  const tail=digs.slice(3);
+  const pairs=[];for(let i=0;i<6;i++)pairs.push(''+tail[i]+tail[i+1]);
+  const ps=pairsScore(pairs),ss=sumScore(rawSum),total=combined(ps,ss);
+  const tier=TIERS.find(t=>total>=t.min);
+  const freq={};tail.forEach(d=>freq[d]=(freq[d]||0)+1);
+  const top=Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];
+  const gc=pairs.filter(p=>pInfo(p).g==='good').length;
+
+  // banner
+  document.getElementById('rb').style.borderColor=tier.c+'40';
+  document.getElementById('rTier').style.color=tier.c;document.getElementById('rTier').textContent=tier.label;
+  document.getElementById('rLabel').textContent=`คะแนนรวม ${total}/100`;document.getElementById('rLabel').style.color=tier.c;
+  document.getElementById('rPct').textContent=tier.pct+' ของเบอร์ทั้งหมด';
+  const rb2=document.getElementById('rBar');rb2.style.background=tier.bar;rb2.style.width='0%';
+  setTimeout(()=>rb2.style.width=total+'%',60);
+  const psC=ps>=70?'#4ade80':ps>=50?'#fbbf24':'#f87171';
+  document.getElementById('pScore').textContent=ps+'/100';document.getElementById('pScore').style.color=psC;
+  document.getElementById('pSub').textContent=gc+' คู่มงคล';document.getElementById('pSub').style.color=psC;
+  const pb=document.getElementById('pBar');pb.style.background=psC;pb.style.width='0%';setTimeout(()=>pb.style.width=ps+'%',80);
+  const ssC=ss>=70?'#4ade80':ss>=50?'#fbbf24':'#f87171';
+  document.getElementById('sScore').textContent=ss+'/100';document.getElementById('sScore').style.color=ssC;
+  document.getElementById('sSub').textContent='ผลรวม '+rawSum+(GOOD_S.includes(rawSum)?' (มงคล)':BAD_S.includes(rawSum)?' (ระวัง)':' (กลาง)');document.getElementById('sSub').style.color=ssC;
+  const sb2=document.getElementById('sBar2');sb2.style.background=ssC;sb2.style.width='0%';setTimeout(()=>sb2.style.width=ss+'%',80);
+  document.getElementById('stSum').textContent=rawSum;
+  document.getElementById('stGood').textContent=gc+'/6';
+  document.getElementById('stGood').style.color=gc>=4?'#4ade80':gc>=2?'#fbbf24':'#f87171';
+  document.getElementById('stPlanet').textContent=PL[+top[0]];
+  document.getElementById('stPSub').textContent='เลข '+top[0]+' ×'+top[1];
+  let drow='';digs.forEach((d,i)=>{if(i===3||i===6)drow+='<div class="chip sep">-</div>';drow+=`<div class="chip">${d}</div>`;});
+  document.getElementById('dRow').innerHTML=drow;
+  document.getElementById('calcNote').textContent=digs.join('+')+' = '+rawSum;
+  const dc=pairs.filter(p=>['bad','danger'].includes(pInfo(p).g)).length;
+  document.getElementById('pSum').textContent=`คู่มงคล ${gc} · คู่ระวัง ${dc} · จาก 6 คู่`;
+  let pH='';pairs.forEach(p=>{const inf=pInfo(p);pH+=`<div class="pair-card ${BORDER_CLS[inf.g]}"><div class="pair-num">${p}</div><div class="pair-stars">${PL[+p[0]]}+${PL[+p[1]]}</div><div class="pair-meaning">${inf.m}</div><div class="pair-badge ${inf.g}">${PAIRS_LABELS[inf.g]}</div></div>`;});
+  document.getElementById('pGrid').innerHTML=pH;
+  let plH='';Object.entries(freq).sort((a,b)=>b[1]-a[1]).forEach(([d,f])=>{plH+=`<div class="pb-row"><div class="pb-name">${PL[+d]} (${d})</div><div class="pb-bg"><div class="pb-fill" style="width:${Math.round(f/7*100)}%"></div></div><div class="pb-cnt">${f}</div></div>`;});
+  document.getElementById('pBars').innerHTML=plH;
+  const meaning=MEANINGS[rawSum]||(GOOD_S.includes(rawSum)?`ผลรวม ${rawSum} อยู่ในกลุ่มมงคล การงานและการเงินราบรื่น`:BAD_S.includes(rawSum)?`ผลรวม ${rawSum} มีอุปสรรคปะปน ควรพิจารณาคู่อันดับเพิ่มเติม`:`ผลรวม ${rawSum} พลังงานกลาง ให้น้ำหนักที่คู่อันดับเป็นหลัก`);
+  const fBadge=GOOD_S.includes(rawSum)?'f-good':BAD_S.includes(rawSum)?'f-bad':'f-neutral';
+  const fTxt=GOOD_S.includes(rawSum)?'มงคล':BAD_S.includes(rawSum)?'ระวัง':'กลาง';
+  document.getElementById('mLbl').innerHTML=`ผลรวม <strong>${rawSum}</strong> <span class="fbadge ${fBadge}">${fTxt}</span>`;
+  document.getElementById('mTxt').textContent=meaning;
+}
+function shr(){
+  const ph=document.getElementById('ph').value;
+  const tier=document.getElementById('rTier').textContent;
+  const total=document.getElementById('rLabel').textContent;
+  const m=document.getElementById('mTxt').textContent;
+  navigator.clipboard&&navigator.clipboard.writeText(`📱 วิเคราะห์เบอร์ ${ph}\n${tier} — ${total}\n\n${m.slice(0,80)}...\n\n✨ วิเคราะห์เบอร์ฟรีที่ คัมภีร์ดวง`).then(()=>alert('คัดลอกแล้ว'));
+}
+document.getElementById('ph').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
+document.getElementById('ph').addEventListener('input',e=>{e.target.value=e.target.value.replace(/\D/g,'').slice(0,10)});
+</script>
+</body>
+</html>

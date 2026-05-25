@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิเคราะห์ชื่อมงคล — คัมภีร์ดวง</title>
+<meta name="description" content="วิเคราะห์ชื่อมงคลตามหลักเลขศาสตร์ไทย ตรวจกาลกิณีทักษาปกรณ์ ผลรวมชื่อและนามสกุล อายตนะ 6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600&family=Sarabun:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e0a14;--surface:#16121e;--surface2:#1e1828;--border:rgba(255,255,255,0.08);--text:#f2eeff;--text2:#9988bb;--rose:#e87a9b;--rose2:#ffb3c8;--radius:14px;--mono:'JetBrains Mono',monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;min-height:100vh}
+.header{text-align:center;padding:2.5rem 1.5rem 1.5rem;background:radial-gradient(ellipse at 50% 0%,rgba(232,122,155,0.1) 0%,transparent 70%)}
+.site-name{font-size:11px;letter-spacing:3px;color:var(--rose);margin-bottom:10px;opacity:.8}
+.main-title{font-family:'Noto Serif Thai',serif;font-size:clamp(22px,5vw,32px);font-weight:600;margin-bottom:6px}
+.main-sub{font-size:13px;color:var(--text2)}
+.container{max-width:640px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.input-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.lbl{font-size:12px;color:var(--text2);margin-bottom:5px;display:block}
+.inp{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:16px}
+.inp:focus{outline:none;border-color:var(--rose)}
+.ctrl-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.sel{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface2);color:var(--text);font-size:13px}
+.g-row{display:flex;gap:6px}
+.g-btn{flex:1;padding:9px;border:1px solid var(--border);border-radius:10px;background:transparent;color:var(--text2);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer}
+.g-btn.on{background:var(--rose);border-color:var(--rose);color:#fff}
+.go-btn{width:100%;padding:11px;border:none;border-radius:10px;background:var(--rose);color:#fff;font-family:'Sarabun',sans-serif;font-size:15px;cursor:pointer;margin-bottom:.5rem}
+.go-btn:hover{background:var(--rose2);color:var(--bg)}
+.err{font-size:12px;color:#e05c5c;text-align:center;display:none;margin-bottom:.75rem}
+.result{display:none}
+.sec{font-size:11px;letter-spacing:1.5px;color:var(--rose);text-transform:uppercase;margin:1.25rem 0 8px;opacity:.8}
+.vc{border-radius:var(--radius);padding:1.25rem 1.25rem 1rem;margin-bottom:1rem;border:1px solid var(--border)}
+.vc-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.vc-icon{font-size:30px;flex-shrink:0}
+.vc-title{font-size:18px;font-weight:500}
+.vc-sub{font-size:13px;color:var(--text2);margin-top:2px}
+.rl{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.rr{display:flex;align-items:flex-start;gap:8px;font-size:13px;padding:8px 10px;border-radius:10px;line-height:1.5}
+.rr.fail{background:rgba(248,113,113,0.1);color:#fca5a5;border:1px solid rgba(248,113,113,0.2)}
+.rr.pass{background:rgba(74,222,128,0.08);color:#86efac;border:1px solid rgba(74,222,128,0.15)}
+.rr.warn{background:rgba(251,191,36,0.08);color:#fcd34d;border:1px solid rgba(251,191,36,0.15)}
+.rr.info{background:var(--surface2);color:var(--text2);border:1px solid var(--border)}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem}
+.sc{border-radius:var(--radius);border:1px solid var(--border);padding:11px 8px;text-align:center;background:var(--surface);transition:opacity .2s}
+.sc.dim{opacity:.3}
+.sc-lbl{font-size:10px;color:var(--text2);margin-bottom:3px}
+.sc-val{font-size:22px;font-weight:500}
+.sc-planet{font-size:11px;color:var(--text2);margin-top:2px}
+.sc-pct{font-size:10px;color:var(--text2);margin-top:1px}
+.bdg{display:inline-block;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:500;margin-top:3px}
+.bdg-g{background:rgba(74,222,128,0.12);color:#4ade80}
+.bdg-b{background:rgba(248,113,113,0.1);color:#f87171}
+.bdg-n{background:rgba(251,191,36,0.1);color:#fbbf24}
+.bkd{background:var(--surface);border-radius:var(--radius);padding:10px 12px;font-size:12px;font-family:var(--mono);line-height:2;color:var(--text2);margin-bottom:1rem}
+.kc{background:rgba(248,113,113,0.15);color:#fca5a5;padding:1px 5px;border-radius:4px;font-weight:600}
+.lnkc{background:rgba(251,191,36,0.1);color:#fcd34d;padding:1px 5px;border-radius:4px}
+.mbox{background:var(--surface);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.75;border-left:3px solid var(--rose);color:var(--text);margin-bottom:1rem}
+.mlbl{font-size:11px;color:var(--text2);margin-bottom:5px}
+.abox{background:var(--surface);border-radius:var(--radius);padding:12px 14px;font-size:13px;line-height:1.75;border-left:3px solid #9b7fe8;color:var(--text);margin-bottom:1rem}
+.star-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.star-chip{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;border:1px solid var(--border);background:var(--surface);font-size:12px;color:var(--text)}
+.share-btn{width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--text);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer}
+.share-btn:hover{background:var(--surface)}
+footer{text-align:center;padding:2rem;font-size:12px;color:var(--text2);border-top:1px solid var(--border);opacity:.5}
+.gt{color:#4ade80}.bt{color:#f87171}.nt{color:#fbbf24}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="site-name">คัมภีร์ดวง</div>
+  <h1 class="main-title">วิเคราะห์ชื่อมงคล</h1>
+  <p class="main-sub">ทักษาปกรณ์ · กาลกิณี · เลขศาสตร์ · อายตนะ 6</p>
+</div>
+<div class="container">
+  <div class="input-card">
+    <div class="form-row">
+      <div><div class="lbl">ชื่อตัว * (ตรวจกาลกิณี)</div><input class="inp" id="fn" placeholder="เช่น มาลี"></div>
+      <div><div class="lbl">นามสกุล (คำนวณผลรวม)</div><input class="inp" id="ln" placeholder="เช่น รักดี"></div>
+    </div>
+    <div class="ctrl-row">
+      <div><div class="lbl">วันเกิด</div>
+        <select class="sel" id="day">
+          <option value="sunday">วันอาทิตย์</option><option value="monday">วันจันทร์</option>
+          <option value="tuesday">วันอังคาร</option><option value="wednesday_day">วันพุธ (กลางวัน)</option>
+          <option value="wednesday_night">วันพุธ (กลางคืน)</option><option value="thursday">วันพฤหัสบดี</option>
+          <option value="friday">วันศุกร์</option><option value="saturday">วันเสาร์</option>
+        </select>
+      </div>
+      <div><div class="lbl">เพศ</div>
+        <div class="g-row">
+          <button class="g-btn on" id="gm" onclick="setG('male')">ชาย ♂</button>
+          <button class="g-btn" id="gf" onclick="setG('female')">หญิง ♀</button>
+        </div>
+      </div>
+    </div>
+    <button class="go-btn" onclick="go()">วิเคราะห์ชื่อ ↗</button>
+    <div class="err" id="err">กรุณากรอกชื่อตัว</div>
+  </div>
+  <div class="result" id="res">
+    <div class="vc" id="vc"><div class="vc-top"><div class="vc-icon" id="vi"></div><div><div class="vc-title" id="vt"></div><div class="vc-sub" id="vs"></div></div></div><div class="rl" id="rl"></div></div>
+    <div class="sec">ผลรวมเลขศาสตร์ <span id="dimNote" style="font-size:12px;font-weight:400;color:#f87171"></span></div>
+    <div class="score-grid" id="sg"></div>
+    <div class="sec">การถอดค่าทีละตัวอักษร</div>
+    <div class="bkd" id="bkd"></div>
+    <div class="sec">ความหมายผลรวมชื่อตัว</div>
+    <div class="mbox"><div class="mlbl" id="ml"></div><div id="mt"></div></div>
+    <div class="sec">อายตนะ 6 — แรงดึงดูดภายนอก</div>
+    <div class="abox"><div class="mlbl" id="al"></div><div id="at"></div></div>
+    <div class="sec">ดาวประจำอักษรในชื่อตัว</div>
+    <div class="star-row" id="sr"></div>
+    <button class="share-btn" onclick="shr()">แชร์ผลวิเคราะห์ใน LINE ↗</button>
+  </div>
+</div>
+<footer><p>คัมภีร์ดวง — ข้อมูลอ้างอิงตามหลักโหราศาสตร์ไทย เพื่อความบันเทิงเท่านั้น</p></footer>
+<script>
+const CV={"ก":1,"ด":1,"ท":1,"ถ":1,"ภ":1,"ฤ":1,"า":1,"ุ":1,"ำ":1,"่":1,"ข":2,"ช":2,"บ":2,"ป":2,"ง":2,"เ":2,"แ":2,"ู":2,"้":2,"ฆ":3,"ฑ":3,"ฒ":3,"ต":3,"ฃ":3,"ฅ":3,"๋":3,"ค":4,"ธ":4,"ร":4,"ญ":4,"ษ":4,"โ":4,"ะ":4,"ิ":4,"ั":4,"ฉ":5,"ณ":5,"ฌ":5,"น":5,"ม":5,"ห":5,"ฮ":5,"ฎ":5,"ฬ":5,"ึ":5,"จ":6,"ล":6,"ว":6,"อ":6,"ใ":6,"ศ":7,"ส":7,"ซ":7,"ี":7,"ื":7,"๊":7,"ย":8,"พ":8,"ฟ":8,"ผ":8,"ฝ":8,"็":8,"ฏ":9,"ฐ":9,"ไ":9,"์":9};
+const PL={1:"อาทิตย์",2:"จันทร์",3:"อังคาร",4:"พุธ",5:"พฤหัสฯ",6:"ศุกร์",7:"เสาร์",8:"ราหู",9:"เกตุ"};
+const KAL={sunday:["ศ","ษ","ส","ห","ฬ","ฮ"],monday:["อ","ะ","า","ิ","ี","ึ","ื","ุ","ู","เ","แ","โ","ใ","ไ","ำ"],tuesday:["ก","ข","ค","ฆ","ง"],wednesday_day:["จ","ฉ","ช","ซ","ฌ","ญ"],wednesday_night:["บ","ป","ผ","ฝ","พ","ฟ","ภ","ม"],thursday:["ด","ต","ถ","ท","ธ","น"],friday:["ย","ร","ล","ว"],saturday:["ฎ","ฏ","ฐ","ฑ","ฒ","ณ"]};
+const MON_EX=["ั","์"];
+const GOOD_ALL=[14,15,19,23,24,36,41,42,45,46,50,51,54,55,56,59,63,64,65];
+const GOOD_F=[24,29,33,36,38,42,45,47,51,56];
+const GOOD_M=[19,24,28,36,42,45,46,50,54,55,63];
+const BAD=[13,16,27,30,31,33,37,57,67,71,72,73,77,80,81];
+const MN={14:"สติปัญญาและมงคล ฉลาด มีตำแหน่งก้าวไกล ผู้คนเคารพนับถือ",15:"มีผู้ใหญ่อุปถัมภ์ เสน่ห์แรง พูดจาดึงดูดใจ ชีวิตสมหวัง",19:"ความสำเร็จอันยิ่งใหญ่ ผู้ใหญ่อุปถัมภ์ค้ำชู โดดเด่น มีชื่อเสียง",24:"สมบูรณ์สุข มหามงคล มีเสน่ห์ วาทศิลป์เป็นเลิศ โชคการเงินดีมาก",36:"ส่งผลดีทั้งการงานและความรัก เจรจาราบรื่น ค้าขายสำเร็จ",41:"ความสำเร็จ มีชื่อเสียง สติปัญญาดีเลิศ ได้รับอุปถัมภ์จากผู้ใหญ่",42:"ดวงอุปถัมภ์ เป็นที่รักและเคารพ มีโชคการเงิน มิตรสหายเกื้อหนุน",45:"เทพีแห่งโชค ปัญญาและความเจริญ โชคลาภไม่คาดฝัน การงานมั่นคง",54:"พลังมหาราชาโชค สำเร็จสมปรารถนาทุกเรื่อง ตำแหน่งสูง ไม่มีวันตกต่ำ",55:"พลังแห่งปัญญาและบารมี มั่นคง รักความยุติธรรม ชีวิตสงบสุข",59:"ยอดแห่งรหัสชีวิต สำเร็จอย่างดียิ่ง รุ่งเรือง โอกาสต่างประเทศสูง",65:"คู่ทรัพย์คู่โชค ราบรื่นเจริญก้าวหน้า หาเงินเก่ง ความรักอบอุ่น"};
+const AV={"อ":6,"ะ":6,"า":6,"ิ":6,"ี":6,"ุ":6,"ู":6,"เ":6,"โ":6,"ก":15,"ข":15,"ฃ":15,"ค":15,"ฅ":15,"ฆ":15,"ง":15,"จ":8,"ฉ":8,"ช":8,"ซ":8,"ฌ":8,"ญ":8,"ฎ":17,"ฏ":17,"ฐ":17,"ฑ":17,"ฒ":17,"ณ":17,"บ":19,"ป":19,"ผ":19,"ฝ":19,"พ":19,"ฟ":19,"ภ":19,"ม":19,"ศ":21,"ษ":21,"ส":21,"ห":21,"ฬ":21,"ฮ":21,"ด":10,"ต":10,"ถ":10,"ท":10,"ธ":10,"น":10,"ย":12,"ร":12,"ล":12,"ว":12};
+const ASKIP=["ั","์","ฤ","ฤๅ","ใ","ไ","ึ","ื","่","้","๊","๋","็"];
+const AMEAN={1:"ภาวะผู้นำดั่งบิดา เป็นที่พึ่งพิง ให้ความอบอุ่นแก่ผู้พบเห็น",2:"จิตใจอ่อนโยนดั่งมารดา เป็นที่รักใคร่ มีผู้คนไปมาหาสู่เสมอ",3:"ต้องเหน็ดเหนื่อยเหมือนคนรับใช้ มักถูกเอาเปรียบ หาคนรักจริงได้ยาก",4:"รักษาความลับเก่ง แต่อาจดูปิดกั้น",5:"มีเสน่ห์ดึงดูด ทำให้ผู้อื่นรู้สึกสบายใจ",6:"อำนาจและเสน่ห์ดั่งราชินี มีผู้คนอยากใกล้ชิด อุดมสมบูรณ์",7:"มีความลึกลับน่าค้นหา ดึงดูดความสนใจ",8:"แรงกระตุ้น มีพลังงาน ทำให้ผู้อื่นรู้สึกตื่นเต้น",9:"ราชาผู้มีเมตตาธรรม ประสบความสำเร็จ เป็นที่เคารพยำเกรง"};
+function cr(s){if(s>=101&&s<=109)return parseInt(String(s)[0]+String(s)[2]);if(s>=110)return parseInt(String(s).slice(-2));return s;}
+function rd(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);return n;}
+function aytana(name){let s=0;for(let c of name){if(!ASKIP.includes(c)&&AV[c])s+=AV[c];}return rd(s)||1;}
+let gender='male';
+function setG(g){gender=g;document.getElementById('gm').classList.toggle('on',g==='male');document.getElementById('gf').classList.toggle('on',g==='female');}
+function getKal(day){let k=[...(KAL[day]||[])];if(day==='monday')k=k.filter(c=>!MON_EX.includes(c));return k;}
+
+function go(){
+  const fn=document.getElementById('fn').value.trim();
+  const ln=document.getElementById('ln').value.trim();
+  const day=document.getElementById('day').value;
+  document.getElementById('err').style.display=!fn?'block':'none';
+  if(!fn)return;
+  document.getElementById('res').style.display='block';
+  const kal=getKal(day);
+  const dayName=document.getElementById('day').selectedOptions[0].text;
+  let fnS=0,lnS=0;
+  const fnB=[],lnB=[];
+  [...fn].forEach(c=>{const v=CV[c];if(v!=null){fnS+=v;fnB.push({c,v});}});
+  [...ln].forEach(c=>{const v=CV[c];if(v!=null){lnS+=v;lnB.push({c,v});}});
+  const rawT=fnS+lnS;const fFn=cr(fnS),fLn=cr(lnS),fT=cr(rawT);
+  const fnKal=[...[...fn].filter(c=>kal.includes(c)).reduce((s,c)=>{s.add(c);return s;},new Set())];
+  const hasKal=fnKal.length>0;
+  const lnKal=ln?[...[...ln].filter(c=>kal.includes(c)).reduce((s,c)=>{s.add(c);return s;},new Set())]:[];
+  const lnHasKal=lnKal.length>0;
+  const goodList=gender==='female'?[...new Set([...GOOD_ALL,...GOOD_F])]:[...new Set([...GOOD_ALL,...GOOD_M])];
+  const fnGood=goodList.includes(fFn)&&!BAD.includes(fFn);
+  const tGood=goodList.includes(fT)&&!BAD.includes(fT);
+  const fnBad=BAD.includes(fFn);const tBad=BAD.includes(fT);
+  // verdict
+  const vc=document.getElementById('vc');let reasons=[];
+  if(hasKal){
+    vc.style.borderColor='rgba(248,113,113,0.3)';vc.style.background='rgba(248,113,113,0.04)';
+    document.getElementById('vi').textContent='⛔';
+    document.getElementById('vt').textContent='ชื่อตัวไม่ผ่าน — มีกาลกิณี';
+    document.getElementById('vt').style.color='#f87171';
+    document.getElementById('vs').textContent='ต้องเปลี่ยนแค่ชื่อตัว นามสกุลไม่เกี่ยว';
+    reasons.push({t:'fail',i:'❌',tx:`ชื่อตัว "${fn}" มีอักษรกาลกิณี: ${fnKal.map(c=>`<span class="kc">${c}</span>`).join(' ')} — ห้ามใช้สำหรับคนเกิด${dayName}`});
+    if(fnGood) reasons.push({t:'info',i:'ℹ️',tx:`ผลรวมชื่อตัว ${fFn} ดีมาก — ถ้าเปลี่ยนอักษรกาลกิณีออกแล้วยังได้ผลรวมนี้อยู่ = สมบูรณ์แบบ`});
+    else reasons.push({t:'info',i:'ℹ️',tx:`ผลรวมชื่อตัว ${fFn} ยังไม่เป็นมงคล — ควรปรับทั้งอักษรและผลรวมพร้อมกัน`});
+  }else if(fnGood&&(!ln||tGood)){
+    vc.style.borderColor='rgba(74,222,128,0.2)';vc.style.background='rgba(74,222,128,0.04)';
+    document.getElementById('vi').textContent='✨';
+    document.getElementById('vt').textContent='ชื่อตัวมงคล — ผ่านทุกเกณฑ์';
+    document.getElementById('vt').style.color='#4ade80';
+    document.getElementById('vs').textContent='ปราศจากกาลกิณี ผลรวมเป็นมงคล';
+    reasons.push({t:'pass',i:'✅',tx:`ไม่มีอักษรกาลกิณีในชื่อตัวสำหรับคนเกิด${dayName}`});
+    reasons.push({t:'pass',i:'✅',tx:`ผลรวมชื่อตัว ${fFn} — เป็นมงคล`});
+    if(ln)reasons.push({t:'pass',i:'✅',tx:`ผลรวมรวมนามสกุล ${fT} — เป็นมงคล`});
+  }else if(fnGood){
+    vc.style.borderColor='rgba(251,191,36,0.2)';vc.style.background='var(--surface)';
+    document.getElementById('vi').textContent='⭐';
+    document.getElementById('vt').textContent='ชื่อตัวดี — ผลรวมรวมยังไม่สมบูรณ์';
+    document.getElementById('vt').style.color='#fbbf24';
+    document.getElementById('vs').textContent='นามสกุลเปลี่ยนไม่ได้ — ถือว่าชื่อตัวผ่านแล้ว';
+    reasons.push({t:'pass',i:'✅',tx:`ไม่มีอักษรกาลกิณีในชื่อตัว`});
+    reasons.push({t:'pass',i:'✅',tx:`ผลรวมชื่อตัว ${fFn} — เป็นมงคล`});
+    if(ln)reasons.push({t:'warn',i:'⚠️',tx:`ผลรวมรวมนามสกุล ${fT} ยังไม่เป็นมงคล — แต่นามสกุลเปลี่ยนไม่ได้`});
+  }else{
+    vc.style.borderColor='rgba(248,113,113,0.2)';vc.style.background='var(--surface)';
+    document.getElementById('vi').textContent='⚠️';
+    document.getElementById('vt').textContent='ชื่อตัวยังไม่มงคล — ควรปรับผลรวม';
+    document.getElementById('vt').style.color='#f87171';
+    document.getElementById('vs').textContent='ไม่มีกาลกิณี แต่ผลรวมยังไม่ดี';
+    reasons.push({t:'pass',i:'✅',tx:`ไม่มีอักษรกาลกิณีในชื่อตัว`});
+    reasons.push({t:'fail',i:'❌',tx:`ผลรวมชื่อตัว ${fFn}${fnBad?' (เลขเสีย)':' (ยังไม่เป็นมงคล)'} — ควรปรับชื่อให้ได้ผลรวมที่ดีกว่า`});
+  }
+  if(lnHasKal)reasons.push({t:'info',i:'📌',tx:`นามสกุลมีอักษร ${lnKal.map(c=>`<span class="lnkc">${c}</span>`).join(' ')} ตรงกับกาลกิณีของคนเกิด${dayName} — นามสกุลเปลี่ยนไม่ได้ รับรู้ไว้ก็พอ`});
+  document.getElementById('rl').innerHTML=reasons.map(r=>`<div class="rr ${r.t}"><div>${r.i}</div><div>${r.tx}</div></div>`).join('');
+  // scores
+  document.getElementById('dimNote').textContent=hasKal?'(ถูกกาลกิณีตัดก่อน)':'';
+  const dim=hasKal?'dim':'';
+  const fnCls=fnGood?'gt':fnBad?'bt':'nt';const tCls=tGood?'gt':tBad?'bt':'nt';
+  document.getElementById('sg').innerHTML=`
+    <div class="sc ${dim}"><div class="sc-lbl">ชื่อตัว</div><div class="sc-val ${fnCls}">${fFn}</div><div class="sc-planet">ดาว${PL[rd(fFn)]||'?'}</div><div><span class="bdg ${fnGood?'bdg-g':fnBad?'bdg-b':'bdg-n'}">${fnGood?'มงคล':fnBad?'เสีย':'กลาง'}</span></div><div class="sc-pct">40–50%</div></div>
+    <div class="sc"><div class="sc-lbl">นามสกุล</div><div class="sc-val">${ln?fLn:'—'}</div><div class="sc-planet">${ln?'ดาว'+(PL[rd(fLn)]||'?'):'ไม่ได้กรอก'}</div>${lnHasKal&&ln?'<div><span class="bdg bdg-n">มีกาลกิณี*</span></div>':''}<div class="sc-pct">20–30%</div></div>
+    <div class="sc ${dim}"><div class="sc-lbl">รวมทั้งหมด</div><div class="sc-val ${tCls}">${ln?fT:'—'}</div><div class="sc-planet">${ln?'ดาว'+(PL[rd(fT)]||'?'):'ใส่นามสกุลด้วย'}</div>${ln?`<div><span class="bdg ${tGood?'bdg-g':tBad?'bdg-b':'bdg-n'}">${tGood?'มงคล':tBad?'เสีย':'กลาง'}</span></div>`:''}<div class="sc-pct">20–40%</div></div>`;
+  // breakdown
+  const rb=(arr,lbl,isLn=false)=>{
+    if(!arr.length)return'';
+    const k=isLn?[]:kal;
+    const p=arr.map(({c,v})=>k.includes(c)?`<span class="kc">${c}(${v})</span>`:isLn&&kal.includes(c)?`<span class="lnkc">${c}(${v})</span>`:` ${c}(${v})`).join('+');
+    const s=arr.reduce((a,b)=>a+b.v,0);
+    return`${lbl}: ${p} = ${s}${s!==cr(s)?' → '+cr(s):''}`;
+  };
+  let bd=rb(fnB,'ชื่อตัว');if(lnB.length)bd+='\n'+rb(lnB,'นามสกุล',true);
+  if(ln)bd+=`\nรวม: ${fnS}+${lnS}=${rawT}${rawT!==fT?' → '+fT+' (Century Rule)':''}`;
+  document.getElementById('bkd').innerHTML=bd;
+  // meaning
+  const m=MN[fFn]||`ผลรวม ${fFn} — พลังงานดาว${PL[rd(fFn)]||'?'} ส่งผลต่อบุคลิกภาพ`;
+  document.getElementById('ml').textContent=`ผลรวมชื่อตัว ${fFn} — ดาว${PL[rd(fFn)]||'?'}`;
+  document.getElementById('mt').textContent=m;
+  // aytana
+  const an=aytana(fn);
+  document.getElementById('al').textContent=`เลขอายตนะ ${an} — แรงดึงดูดที่ผู้อื่นรู้สึกต่อ "${fn}"`;
+  document.getElementById('at').textContent=AMEAN[an]||'พลังงานผสมผสาน';
+  // stars
+  const pc={};[...fn].forEach(c=>{const v=CV[c];if(v)pc[v]=(pc[v]||0)+1;});
+  document.getElementById('sr').innerHTML=Object.entries(pc).sort((a,b)=>b[1]-a[1]).map(([v,n])=>`<div class="star-chip">${PL[+v]} <span style="color:var(--text2)">(${n})</span></div>`).join('');
+}
+function shr(){
+  const fn=document.getElementById('fn').value,ln=document.getElementById('ln').value;
+  const vt=document.getElementById('vt').textContent,mt=document.getElementById('mt').textContent;
+  navigator.clipboard&&navigator.clipboard.writeText(`✨ วิเคราะห์ชื่อ "${fn}${ln?' '+ln:''}"\n${vt}\n\n${mt.slice(0,80)}...\n\n🔮 วิเคราะห์ชื่อของคุณที่ คัมภีร์ดวง`).then(()=>alert('คัดลอกแล้ว'));
+}
+</script>
+</body>
+</html>
