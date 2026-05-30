@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เซียมซีออนไลน์ วัดหลวงพ่อโสธร — คัมภีร์ดวง</title>
+<meta name="description" content="เซียมซีออนไลน์วัดหลวงพ่อโสธร เขย่าได้เลย คำทำนาย 28 ใบ เลขมงคล การงาน การเงิน ความรัก">
+<meta property="og:title" content="เซียมซีออนไลน์ วัดหลวงพ่อโสธร">
+<meta property="og:image" content="https://kambheerduang.com/og-image.jpg">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0BRJVKR6BV"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0BRJVKR6BV');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060402;
+  --surface:#100c06;
+  --surface2:#1a1408;
+  --gold:#c9a84c;
+  --gold2:#e8c97a;
+  --gold3:#f5d98a;
+  --red:#8b1a1a;
+  --red2:#c23030;
+  --text:#f5edd8;
+  --text2:#a8916a;
+  --border:rgba(201,168,76,0.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Sarabun',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* Thai pattern bg */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 100% 50% at 50% 0%,rgba(139,26,26,0.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 100%,rgba(201,168,76,0.06) 0%,transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 100%,rgba(201,168,76,0.06) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* Subtle Thai pattern overlay */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(201,168,76,0.03) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;z-index:0;
+}
+
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,4,2,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:700px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 1.25rem;
+}
+.logo{font-family:'Noto Serif Thai',serif;font-size:16px;font-weight:700;color:var(--gold);text-decoration:none}
+.nav-links{display:flex;gap:1.25rem;font-size:12px}
+.nav-links a{color:var(--text2);text-decoration:none}
+.nav-links a:hover{color:var(--gold)}
+
+.wrap{max-width:680px;margin:0 auto;padding:0 1rem 5rem;position:relative;z-index:1}
+
+/* ── HEADER ── */
+.header{text-align:center;padding:2rem 1rem 1.5rem}
+.header-ornament{color:var(--gold);font-size:20px;letter-spacing:8px;opacity:.6;margin-bottom:.75rem}
+.header-title{
+  font-family:'Noto Serif Thai',serif;
+  font-size:clamp(22px,5vw,30px);
+  font-weight:700;
+  color:var(--gold2);
+  line-height:1.3;
+  margin-bottom:4px;
+}
+.header-sub{font-size:13px;color:var(--text2);margin-bottom:1rem}
+.header-desc{
+  font-size:13px;color:var(--text2);
+  line-height:1.8;
+  max-width:480px;margin:0 auto;
+  padding:10px 16px;
+  background:linear-gradient(135deg,rgba(139,26,26,0.12),rgba(201,168,76,0.06));
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+/* gold divider */
+.divider{
+  display:flex;align-items:center;gap:12px;
+  margin:1.5rem 0;color:var(--gold);opacity:.5;
+  font-size:12px;letter-spacing:3px;
+}
+.divider::before,.divider::after{
+  content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+/* ── PRAYER SECTION ── */
+.prayer-section{
+  background:linear-gradient(135deg,rgba(139,26,26,0.15),rgba(16,12,6,0.8));
+  border:1px solid rgba(139,26,26,0.3);
+  border-radius:16px;
+  padding:1.5rem;
+  margin-bottom:1.5rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.prayer-section::before{
+  content:'🕯️';
+  position:absolute;top:10px;left:16px;
+  font-size:18px;opacity:.5;
+}
+.prayer-section::after{
+  content:'🕯️';
+  position:absolute;top:10px;right:16px;
+  font-size:18px;opacity:.5;
+}
+.prayer-label{
+  font-size:11px;letter-spacing:2px;
+  color:rgba(201,168,76,0.7);
+  text-transform:uppercase;
+  margin-bottom:.75rem;
+}
+.prayer-text{
+  font-family:'Noto Serif Thai',serif;
+  font-size:15px;
+  color:var(--text);
+  line-height:2.2;
+  margin-bottom:.75rem;
+}
+.prayer-hint{font-size:12px;color:var(--text2);line-height:1.7}
+
+/* ── CANISTER AREA ── */
+.canister-section{text-align:center;padding:1rem 0 1.5rem}
+.shake-hint-row{
+  font-size:13px;color:var(--text2);
+  margin-bottom:1.5rem;
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+}
+.hint-chip{
+  background:rgba(201,168,76,0.08);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:4px 12px;
+  font-size:12px;
+}
+
+/* CANISTER */
+.canister-outer{
+  position:relative;
+  display:inline-block;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+}
+
+/* glow pulse when ready */
+@keyframes glow-pulse{
+  0%,100%{box-shadow:0 0 20px rgba(201,168,76,0.2),0 0 40px rgba(201,168,76,0.1)}
+  50%{box-shadow:0 0 30px rgba(201,168,76,0.4),0 0 60px rgba(201,168,76,0.2)}
+}
+
+.canister-body{
+  width:100px;height:200px;
+  position:relative;
+  margin:0 auto;
+}
+
+/* Base cylinder */
+.can-base{
+  position:absolute;
+  bottom:0;left:50%;transform:translateX(-50%);
+  width:80px;height:160px;
+  background:
+    linear-gradient(90deg,
+      #5c3d0a 0%,
+      #8b6014 10%,
+      #c9a84c 25%,
+      #f0c842 40%,
+      #e8c040 50%,
+      #c9a84c 60%,
+      #a07828 75%,
+      #7a5810 90%,
+      #5c3d0a 100%);
+  border-radius:8px 8px 16px 16px;
+  box-shadow:
+    inset -8px 0 16px rgba(0,0,0,0.5),
+    inset 6px 0 12px rgba(255,255,255,0.1),
+    0 6px 24px rgba(0,0,0,0.6);
+}
+
+/* Thai pattern on canister */
+.can-pattern{
+  position:absolute;
+  bottom:0;left:50%;transform:translateX(-50%);
+  width:80px;height:160px;
+  border-radius:8px 8px 16px 16px;
+  overflow:hidden;
+  pointer-events:none;
+}
+.can-pattern::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 18px,
+      rgba(139,26,26,0.25) 18px,
+      rgba(139,26,26,0.25) 20px
+    );
+}
+
+/* Canister top cap */
+.can-cap{
+  position:absolute;
+  bottom:155px;left:50%;transform:translateX(-50%);
+  width:88px;height:16px;
+  background:linear-gradient(180deg,#d4b050,#8b6014);
+  border-radius:6px 6px 0 0;
+  box-shadow:0 -2px 8px rgba(0,0,0,0.4);
+}
+
+/* Thai text on canister */
+.can-text{
+  position:absolute;
+  bottom:40px;left:50%;transform:translateX(-50%);
+  width:70px;
+  text-align:center;
+  font-family:'Noto Serif Thai',serif;
+  font-size:10px;
+  font-weight:700;
+  color:rgba(139,26,26,0.8);
+  letter-spacing:1px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.2);
+  pointer-events:none;
+}
+
+/* Sticks */
+.sticks-container{
+  position:absolute;
+  bottom:168px;
+  left:50%;transform:translateX(-50%);
+  width:80px;
+  height:80px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:3px;
+}
+.stick-item{
+  width:5px;
+  border-radius:2px 2px 0 0;
+  transform-origin:bottom center;
+  transition:transform .3s ease;
+  box-shadow:1px 0 3px rgba(0,0,0,0.4);
+}
+.stick-item:nth-child(1){height:62px;background:linear-gradient(180deg,#d4a843 0%,#8b6914 100%);transform:rotate(-12deg)}
+.stick-item:nth-child(2){height:70px;background:linear-gradient(180deg,#e0b850 0%,#9a7520 100%);transform:rotate(-5deg)}
+.stick-item:nth-child(3){height:66px;background:linear-gradient(180deg,#c9a84c 0%,#7a5c10 100%);transform:rotate(0deg)}
+.stick-item:nth-child(4){height:72px;background:linear-gradient(180deg,#e8c97a 0%,#a07828 100%);transform:rotate(6deg)}
+.stick-item:nth-child(5){height:58px;background:linear-gradient(180deg,#d4a843 0%,#8b6914 100%);transform:rotate(13deg)}
+
+/* Shake animation */
+@keyframes shake-hard{
+  0%{transform:rotate(0) translateY(0) scale(1)}
+  8%{transform:rotate(-22deg) translateY(-12px) scale(1.03)}
+  16%{transform:rotate(18deg) translateY(-8px) scale(1.02)}
+  24%{transform:rotate(-20deg) translateY(-15px) scale(1.04)}
+  32%{transform:rotate(16deg) translateY(-10px) scale(1.02)}
+  40%{transform:rotate(-24deg) translateY(-18px) scale(1.05)}
+  48%{transform:rotate(20deg) translateY(-12px) scale(1.03)}
+  56%{transform:rotate(-18deg) translateY(-14px) scale(1.04)}
+  64%{transform:rotate(22deg) translateY(-9px) scale(1.02)}
+  72%{transform:rotate(-14deg) translateY(-11px) scale(1.03)}
+  80%{transform:rotate(10deg) translateY(-7px) scale(1.02)}
+  90%{transform:rotate(-6deg) translateY(-4px) scale(1.01)}
+  100%{transform:rotate(0) translateY(0) scale(1)}
+}
+
+.canister-body.shaking{
+  animation:shake-hard .6s ease-in-out;
+}
+
+/* Stick fly out animation */
+@keyframes stick-out{
+  0%{opacity:1;transform:translateY(0) rotate(0) scale(1)}
+  30%{opacity:1;transform:translateY(-80px) rotate(-15deg) scale(1.1)}
+  60%{opacity:1;transform:translateY(-140px) rotate(-30deg) scale(1.05)}
+  100%{opacity:0;transform:translateY(-200px) rotate(-50deg) scale(0.8)}
+}
+.stick-item.flying{
+  animation:stick-out .8s ease-out forwards;
+  z-index:10;
+}
+
+/* Progress bar for holding */
+.hold-progress-wrap{
+  width:160px;margin:1rem auto 0;
+  height:4px;
+  background:rgba(201,168,76,0.1);
+  border-radius:2px;
+  overflow:hidden;
+}
+.hold-progress-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--red2),var(--gold));
+  border-radius:2px;
+  transition:width .1s linear;
+}
+
+/* Buttons */
+.shake-btn{
+  margin-top:1.25rem;
+  padding:14px 48px;
+  border:2px solid var(--gold);
+  border-radius:30px;
+  background:transparent;
+  color:var(--gold);
+  font-family:'Noto Serif Thai',serif;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:.5px;
+}
+.shake-btn:hover{
+  background:rgba(201,168,76,0.1);
+  box-shadow:0 0 20px rgba(201,168,76,0.2);
+}
+.shake-btn:active{transform:scale(0.97)}
+.shake-btn:disabled{opacity:.35;cursor:not-allowed}
+.gyro-tip{font-size:12px;color:var(--text2);margin-top:10px;min-height:18px}
+
+/* ── RESULT: PAPER SLIP ── */
+@keyframes slip-appear{
+  0%{opacity:0;transform:translateY(30px) scale(0.95)}
+  60%{transform:translateY(-4px) scale(1.02)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.result-section{display:none}
+.result-section.visible{display:block}
+
+.paper-wrap{
+  margin:0 auto 1.5rem;
+  max-width:340px;
+  animation:slip-appear .7s ease-out forwards;
+}
+
+/* Paper background - aged look */
+.paper{
+  background:
+    linear-gradient(160deg,#f5f0e0 0%,#ede8d5 30%,#e8e0cc 60%,#f0ead8 100%);
+  border-radius:4px;
+  padding:0;
+  position:relative;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(139,120,60,0.3),
+    inset 0 1px 3px rgba(255,255,255,0.5);
+  overflow:hidden;
+}
+
+/* Paper texture */
+.paper::before{
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;
+  pointer-events:none;
+}
+
+/* Thai border frame */
+.paper-border{
+  position:absolute;inset:6px;
+  border:2px solid rgba(101,72,20,0.5);
+  border-radius:2px;
+  pointer-events:none;
+}
+.paper-border::before{
+  content:'';
+  position:absolute;inset:3px;
+  border:1px solid rgba(101,72,20,0.25);
+  border-radius:1px;
+}
+
+/* Corner ornaments */
+.paper-corner{
+  position:absolute;
+  width:18px;height:18px;
+  color:rgba(101,72,20,0.5);
+  font-size:14px;
+  line-height:1;
+}
+.paper-corner.tl{top:8px;left:8px}
+.paper-corner.tr{top:8px;right:8px;transform:scaleX(-1)}
+.paper-corner.bl{bottom:8px;left:8px;transform:scaleY(-1)}
+.paper-corner.br{bottom:8px;right:8px;transform:scale(-1,-1)}
+
+.paper-content{
+  position:relative;
+  padding:20px 22px;
+  z-index:1;
+  text-align:center;
+}
+
+.paper-temple{
+  font-family:'Noto Serif Thai',serif;
+  font-size:15px;
+  font-weight:700;
+  color:#3a2808;
+  margin-bottom:3px;
+  letter-spacing:.5px;
+}
+.paper-number{
+  font-family:'Noto Serif Thai',serif;
+  font-size:20px;
+  font-weight:700;
+  color:#2a1a04;
+  margin-bottom:10px;
+  letter-spacing:2px;
+}
+.paper-title{
+  font-family:'Noto Serif Thai',serif;
+  font-size:14px;
+  font-weight:600;
+  color:#4a2e08;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(101,72,20,0.2);
+}
+.paper-body{
+  font-family:'Noto Serif Thai',serif;
+  font-size:13px;
+  line-height:2;
+  color:#3a2808;
+  text-align:left;
+}
+
+/* Ornamental divider on paper */
+.paper-ornament{
+  font-size:11px;
+  color:rgba(101,72,20,0.5);
+  letter-spacing:4px;
+  margin:8px 0;
+  text-align:center;
+}
+
+.paper-footer{
+  font-size:11px;
+  color:rgba(101,72,20,0.6);
+  text-align:center;
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid rgba(101,72,20,0.15);
+}
+
+/* Level badge on paper */
+.paper-level{
+  display:inline-block;
+  font-size:12px;font-weight:600;
+  padding:3px 14px;border-radius:20px;
+  margin-bottom:8px;
+}
+.lv-very_good{background:rgba(74,222,128,0.15);color:#2d8b50;border:1px solid rgba(74,222,128,0.3)}
+.lv-good{background:rgba(180,130,40,0.15);color:#7a5010;border:1px solid rgba(180,130,40,0.3)}
+.lv-neutral{background:rgba(100,80,40,0.1);color:#6b5030;border:1px solid rgba(100,80,40,0.2)}
+.lv-caution{background:rgba(200,150,30,0.12);color:#8b6010;border:1px solid rgba(200,150,30,0.25)}
+.lv-bad{background:rgba(180,60,60,0.12);color:#8b2020;border:1px solid rgba(180,60,60,0.25)}
+
+/* ── DETAIL CARDS ── */
+.detail-section{margin-bottom:1.5rem}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.d-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1rem;
+}
+.d-card.full{grid-column:1/-1}
+.d-icon{font-size:18px;margin-bottom:5px}
+.d-lbl{font-size:11px;color:var(--text2);margin-bottom:4px;letter-spacing:.5px}
+.d-txt{font-size:13px;color:var(--text);line-height:1.7}
+
+/* Lucky numbers */
+.lucky-section{
+  text-align:center;
+  background:linear-gradient(135deg,rgba(139,26,26,0.1),rgba(201,168,76,0.08));
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem;
+  margin-bottom:1rem;
+}
+.lucky-lbl{font-size:11px;color:var(--text2);margin-bottom:.75rem;letter-spacing:1px;text-transform:uppercase}
+.lucky-nums{display:flex;gap:10px;justify-content:center}
+.lucky-num{
+  width:50px;height:50px;border-radius:50%;
+  background:linear-gradient(135deg,#8b6014,#c9a84c,#f0c842);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Serif Thai',serif;
+  font-size:22px;font-weight:700;
+  color:#1a0e00;
+  box-shadow:0 3px 12px rgba(201,168,76,0.35);
+}
+
+/* Actions */
+.action-row{display:flex;gap:10px}
+.btn-retry{
+  flex:1;padding:12px;
+  border:1px solid var(--border);border-radius:30px;
+  background:transparent;color:var(--text2);
+  font-family:'Sarabun',sans-serif;font-size:14px;cursor:pointer;
+}
+.btn-retry:hover{border-color:var(--gold);color:var(--gold)}
+.btn-share{
+  flex:1;padding:12px;border:none;border-radius:30px;
+  background:var(--gold);color:#0a0800;
+  font-family:'Sarabun',sans-serif;font-size:14px;font-weight:500;cursor:pointer;
+}
+.btn-share:hover{background:var(--gold2)}
+
+footer{
+  text-align:center;padding:2rem;
+  font-size:12px;color:var(--text2);
+  border-top:1px solid var(--border);
+  opacity:.5;position:relative;z-index:1;
+}
+
+@media(max-width:480px){
+  .nav-links{display:none}
+  .detail-grid{grid-template-columns:1fr}
+  .d-card.full{grid-column:1}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a href="/" class="logo">⭐ คัมภีร์ดวง</a>
+  <div class="nav-links">
+    <a href="/สีเสื้อมงคล/tool.html">สีเสื้อ</a>
+    <a href="/เบอร์มงคล/tool.html">เบอร์</a>
+    <a href="/ดูดวง/tool.html">ดูดวง</a>
+    <a href="/ชื่อมงคล/tool.html">ชื่อมงคล</a>
+  </div>
+</div></nav>
+
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-ornament">❧ ✦ ❧</div>
+    <div class="header-title">เซียมซีออนไลน์<br>วัดหลวงพ่อโสธร</div>
+    <div class="header-sub">พระอารามหลวง จ.ฉะเชิงเทรา · ขอได้ ไหว้รับ</div>
+    <div class="header-desc">หลวงพ่อโสธร พระพุทธรูปศักดิ์สิทธิ์แห่งแม่น้ำบางปะกง ขึ้นชื่อด้านค้าขาย ธุรกิจ และความโชคดี ตั้งจิตอธิษฐานด้วยความเคารพ แล้วเขย่าเซียมซีขอพร</div>
+  </div>
+
+  <div id="shakeSection">
+
+    <!-- PRAYER -->
+    <div class="prayer-section">
+      <div class="prayer-label">บทสวดก่อนเขย่า</div>
+      <div class="prayer-text">
+        นะโม ตัสสะ ภะคะวะโต<br>
+        อะระหะโต สัมมาสัมพุทธัสสะ<br>
+        <span style="opacity:.6;font-size:13px">(สวด ๓ จบ)</span>
+      </div>
+      <div class="prayer-hint">
+        ตั้งจิตอธิษฐานสิ่งที่ต้องการในใจ<br>
+        แล้วเขย่ากระบอกเซียมซีด้วยความเคารพ
+      </div>
+    </div>
+
+    <!-- CANISTER -->
+    <div class="canister-section">
+      <div class="shake-hint-row">
+        <span class="hint-chip">📱 มือถือ: เขย่าโทรศัพท์</span>
+        <span class="hint-chip">💻 Desktop: กดค้างที่กระบอก</span>
+      </div>
+
+      <div class="canister-outer" id="canisterOuter"
+        onmousedown="startHold()" onmouseup="endHold()" onmouseleave="endHold()"
+        ontouchstart="startHold(event)" ontouchend="endHold()">
+        <div class="canister-body" id="canisterBody">
+          <div class="sticks-container" id="sticksContainer">
+            <div class="stick-item" id="s1"></div>
+            <div class="stick-item" id="s2"></div>
+            <div class="stick-item" id="s3"></div>
+            <div class="stick-item" id="s4"></div>
+            <div class="stick-item" id="s5"></div>
+          </div>
+          <div class="can-cap"></div>
+          <div class="can-base"></div>
+          <div class="can-pattern"></div>
+          <div class="can-text">หลวงพ่อโสธร</div>
+        </div>
+      </div>
+
+      <div class="hold-progress-wrap">
+        <div class="hold-progress-bar" id="holdBar"></div>
+      </div>
+
+      <button class="shake-btn" id="shakeBtn" onclick="doShake()">
+        🎋 เขย่าเซียมซี
+      </button>
+      <div class="gyro-tip" id="gyroTip"></div>
+    </div>
+
+  </div><!-- /shakeSection -->
+
+  <!-- RESULT -->
+  <div class="result-section" id="resultSection">
+
+    <div class="divider">ผลเซียมซี</div>
+
+    <!-- Paper slip -->
+    <div class="paper-wrap" id="paperWrap">
+      <div class="paper">
+        <div class="paper-border"></div>
+        <div class="paper-corner tl">✦</div>
+        <div class="paper-corner tr">✦</div>
+        <div class="paper-corner bl">✦</div>
+        <div class="paper-corner br">✦</div>
+        <div class="paper-content">
+          <div class="paper-temple" id="pTemple">พุทธโสธร</div>
+          <div class="paper-number" id="pNumber">ใบที่ ๑</div>
+          <div class="paper-ornament">~ ~ ~</div>
+          <div class="paper-level" id="pLevel"></div>
+          <div class="paper-title" id="pTitle"></div>
+          <div class="paper-body" id="pBody"></div>
+          <div class="paper-ornament">~ ~ ~</div>
+          <div class="paper-footer">อำเภอเมือง จังหวัดฉะเชิงเทรา</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail cards -->
+    <div class="detail-section">
+      <div class="detail-grid" id="detailGrid"></div>
+    </div>
+
+    <!-- Lucky numbers -->
+    <div class="lucky-section">
+      <div class="lucky-lbl">🎯 เลขมงคลประจำใบ</div>
+      <div class="lucky-nums" id="luckyNums"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-row">
+      <button class="btn-retry" onclick="resetShake()">🔄 เขย่าใหม่</button>
+      <button class="btn-share" onclick="doShare()">แชร์ใน LINE 🔗</button>
+    </div>
+
+  </div><!-- /resultSection -->
+
+</div><!-- /wrap -->
+
+<footer>
+  <p>คัมภีร์ดวง · เซียมซีวัดหลวงพ่อโสธร · เพื่อความบันเทิงเท่านั้น</p>
+  <p style="margin-top:4px"><a href="/about.html" style="color:var(--text2);text-decoration:none">เกี่ยวกับเรา</a> · <a href="/privacy.html" style="color:var(--text2);text-decoration:none">นโยบาย</a></p>
+</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────
+const DATA=[{stick_number:1,title:"มังกรออกถ้ำ",prediction:"ดวงชะตากำลังรุ่งโรจน์ มีคนคอยอุปถัมภ์ค้ำชู สิ่งที่คิดไว้จะสำเร็จสมดั่งใจหมาย แต่ต้องค่อยเป็นค่อยไปอย่าใจร้อน ครอบครัวและคนรอบข้างจะนำความสุขมาให้",work:"ก้าวหน้าอย่างมั่นคง ผู้ใหญ่ให้ความเมตตาเอ็นดูและพร้อมสนับสนุน หากมีอุปสรรคจะผ่านไปได้ด้วยดี",money:"โชคลาภกำลังจะเข้ามาอย่างช้าๆ แต่มั่นคง ลูกหนี้ที่เคยหายหน้าไปจะได้พบหรือได้เงินคืน",love:"คนโสดจะได้พบเนื้อคู่ที่มีคนชักนำมาให้ คนมีคู่ความรักหวานชื่นราบรื่นดีมาก",health:"ร่างกายแข็งแรง อาการเจ็บป่วยจะทุเลาลง ดูแลตัวเองสม่ำเสมอ",lucky_numbers:[1,4,9],level:"very_good",level_th:"ดีมาก"},{stick_number:2,title:"จันทร์ฉายสว่าง",prediction:"สถานการณ์ที่เคยแย่กำลังจะกลับมาดีขึ้น เปรียบเสมือนต้นไม้ใกล้ตายที่ได้รับน้ำค้างจนกลับมาผลิใบอีกครั้ง",work:"กิจการที่เคยซบเซาจะกลับมาฟื้นตัว การเจรจาต้องอาศัยการปรึกษาหารือจึงจะสำเร็จ",money:"การเงินเริ่มคล่องตัวขึ้น มีเกณฑ์ได้รับโชคลาภหรือทรัพย์สินที่คาดหวังไว้",love:"อาจมีความไม่เข้าใจกันบ้าง แต่ถ้าใช้ความอดทนและความเข้าใจจะผ่านไปได้",health:"สุขภาพเริ่มฟื้นตัวดีขึ้น หมั่นออกกำลังกายและพักผ่อนให้เพียงพอ",lucky_numbers:[2,6,8],level:"good",level_th:"ดี"},{stick_number:3,title:"เมฆบดบัง",prediction:"เป็นช่วงเวลาแห่งความยากลำบากและเหน็ดเหนื่อย ทำสิ่งใดก็มักติดขัด มีศัตรูคอยปองร้ายขัดขวาง ต้องอดทนอย่างหนัก",work:"มีแต่อุปสรรค ทำดีไม่ได้ดี ระวังเพื่อนร่วมงานแทงข้างหลัง",money:"โชคลาภไม่มี การเงินฝืดเคือง อย่าเพิ่งลงทุนหรือเสี่ยงโชคในช่วงนี้",love:"มีความขัดแย้งรุนแรง ความรักฟั่นเฟือนไม่เป็นใจ คนโสดควรพักเรื่องรักไว้ก่อน",health:"ระวังสุขภาพ อย่าปล่อยให้ความเครียดสะสม พักผ่อนให้เพียงพอ",lucky_numbers:[3,0,7],level:"bad",level_th:"ร้าย"},{stick_number:4,title:"ไก่พลัดฝูง",prediction:"มีเกณฑ์ต้องพลัดพรากจากสิ่งที่รักหรือคนที่ผูกพัน ทำอะไรอย่าออกหน้าเกินไป ให้ตามหลังผู้ใหญ่จึงจะปลอดภัย",work:"อย่าเพิ่งริเริ่มอะไรใหม่ๆ หรือออกตัวแรง ให้ทำงานแบบปิดทองหลังพระไปก่อน",money:"ยังไม่มีโชคลาภเด่นชัดนัก สิ่งที่สูญหายหรือคนที่ตามหายังไม่พบเจอ",love:"คู่รักต้องห่างไกลกันด้วยภาระหน้าที่ กว่าจะได้พบกันต้องใช้เวลา",health:"ดูแลสุขภาพร่างกายและจิตใจ อย่าปล่อยให้ความกังวลทำให้ป่วย",lucky_numbers:[4,1,5],level:"caution",level_th:"ระวัง"},{stick_number:5,title:"ไร้ภัยพาล",prediction:"ไม่มีใครสามารถทำอันตรายคุณได้ อย่ากังวลไปล่วงหน้า แต่ห้ามโลภอยากได้ของผู้อื่น มิฉะนั้นจะต้องเสียของรักของตนเองไปแทน",work:"คบหาใครหรือตกลงอะไรต้องดูให้รอบคอบ ยึดหลักการและแบบแผนเดิมไว้จะปลอดภัย",money:"โชคลาภหาได้ยาก ลำบากก่อนจึงจะได้มา ลูกหนี้หายเข้ากลีบเมฆ",love:"เนื้อคู่อยู่ห่างไกล ยังไม่ถึงเวลาที่จะได้สานสัมพันธ์อย่างจริงจัง",health:"สุขภาพพอใช้ ดูแลตัวเองด้วยอาหารที่มีประโยชน์และนอนหลับให้เพียงพอ",lucky_numbers:[5,2,7],level:"neutral",level_th:"กลาง"},{stick_number:6,title:"พลิกผันสู่ความสำเร็จ",prediction:"อย่าลังเลหรือเปลี่ยนใจไปมา ช่วงนี้อาจดูวุ่นวาย แต่ในระยะยาวทุกอย่างจะลงเอยด้วยความสำเร็จอย่างงดงามแน่นอน",work:"ตอนนี้อาจเหนื่อยและดูไม่มีทิศทาง แต่หากอดทนทำต่อไป อนาคตจะประสบความสำเร็จ",money:"จะมีโชคลาภเข้ามาอย่างที่หวังไว้ ลูกหนี้หรือทรัพย์ที่รุงรังจะได้เคลียร์จนลงตัว",love:"ดีมาก ครอบครัวจะอบอุ่น คนโสดจะได้เจอคู่ที่นำความเจริญรุ่งเรืองมาให้",health:"สุขภาพทรงตัว ดูแลตัวเองต่อเนื่อง อย่าหักโหมทำงานจนเกินไป",lucky_numbers:[6,9,3],level:"neutral",level_th:"กลาง"},{stick_number:7,title:"ร่มไม้ชายคา",prediction:"หมดเคราะห์หมดโศก ชีวิตร่มเย็นเป็นสุข คนรอบข้างพลอยยินดีไปด้วย แต่ในใจอาจยังมีความกังวลลึกๆ แนะนำให้หมั่นทำบุญ",work:"กิจการงานราบรื่น ปัญหาที่เคยมีจะได้รับการแก้ไข ขอเพียงอย่าโลภมากเกินกำลัง",money:"มีโชคลาภเข้ามาอย่างเห็นได้ชัด ของที่หายจะได้คืน หยิบจับอะไรก็เป็นเงินเป็นทอง",love:"แสนดีชื่นมื่น คนมีคู่เข้าใจกันดี คนโสดจะเจอคนที่ถูกใจ",health:"สุขภาพดี แข็งแรง มีพลังงานเพียงพอสำหรับกิจกรรมต่างๆ",lucky_numbers:[7,5,8],level:"good",level_th:"ดี"},{stick_number:8,title:"มณฑาขาดราก",prediction:"ดูภายนอกเหมือนจะดีแต่ภายในไม่มั่นคง เปรียบเหมือนต้นไม้งามที่รากแก้วขาด เป็นช่วงเวลาที่ยากลำบากและแห้งแล้ง",work:"ไม่มั่นคงอย่างรุนแรง หากเป็นไปได้ควรเปลี่ยนงานหรือเปลี่ยนวิธีการทำธุรกิจจึงจะรอด",money:"ไม่มีโชคลาภ ของหายไม่ได้คืน คดีความจะแพ้และสร้างความเดือดร้อน",love:"ไม่ดีเลย มีความเสี่ยงที่จะเลิกรา หรือคนที่เข้ามาหาหวังเพียงผลประโยชน์ชั่วคราว",health:"ระวังสุขภาพเป็นพิเศษ อย่าละเลยอาการที่ผิดปกติ ควรพบแพทย์หากมีอาการ",lucky_numbers:[8,0,4],level:"bad",level_th:"ร้าย"},{stick_number:9,title:"มัจฉากลายเป็นมังกร",prediction:"ชีวิตจะมีการเปลี่ยนแปลงไปในทิศทางที่ดีขึ้นอย่างก้าวกระโดด เปรียบเหมือนปลาที่ว่ายทวนน้ำจนกลายเป็นมังกร",work:"กิจการจะฟูเฟื่อง ธุรกิจก้าวหน้า หากเดินทางไปติดต่อเจรจางานจะประสบความสำเร็จสูงมาก",money:"มีเกณฑ์ได้รับโชคลาภก้อนใหญ่ ฐานะทางการเงินจะยกระดับขึ้นอย่างชัดเจน",love:"คนโสดจะได้พบรักจากการเดินทางหรือคนที่พลัดพรากจะได้กลับมาพบกันใหม่",health:"สุขภาพแข็งแรง มีพลังงานสูง ช่วงเวลานี้เหมาะกับการเริ่มออกกำลังกาย",lucky_numbers:[9,2,5],level:"very_good",level_th:"ดีมาก"},{stick_number:10,title:"นอนหลับฝันไป",prediction:"สถานการณ์อึดอัดกลืนไม่เข้าคายไม่ออก เปรียบเหมือนคนใบ้ที่พูดไม่ได้ ชีวิตช่วงนี้คาดเดาอะไรไม่ได้เลย",work:"อึดอัดใจในที่ทำงาน มีปัญหาแต่พูดไม่ออก สื่อสารกับใครก็ไม่เข้าใจ ต้องอดทนสถานเดียว",money:"การเงินฝืดเคือง โชคลาภไม่มี ของหายอย่าหวังจะได้คืน",love:"ไม่มีความสุข อาจมีความลับต่อกัน หรือรักแต่บอกไม่ได้ คนโสดยังไม่เจอคนที่ใช่",health:"ระวังการสะสมความเครียด นอนหลับพักผ่อนให้เพียงพอ ทำสมาธิเพื่อผ่อนคลาย",lucky_numbers:[1,0,7],level:"bad",level_th:"ร้าย"},{stick_number:11,title:"เมฆบังจันทร์",prediction:"ชีวิตตอนนี้เหมือนพระจันทร์ที่ถูกเมฆบดบัง แต่เดี๋ยวเมฆก็จะลอยผ่านไป ทุกอย่างเป็นไปตามกฎแห่งกรรม",work:"ทรงตัว สิ่งที่ทำร่วมกับคนคุ้นเคยหรือครอบครัวจะออกมาดี ไม่ควรริเริ่มโปรเจกต์แปลกใหม่เกินตัว",money:"มีโชคลาภเข้ามาเป็นระยะๆ หากมีคดีความก็จะชนะและราบรื่น",love:"สดใสไร้กังวล คนโสดอาจพบรักกับคนใกล้ตัวหรือเพื่อนเก่า",health:"สุขภาพดีพอประมาณ ดูแลตัวเองอย่างสม่ำเสมอจะช่วยรักษาสุขภาพที่ดีได้",lucky_numbers:[1,1,5],level:"neutral",level_th:"กลาง"},{stick_number:12,title:"คนใบ้เดินตามกัน",prediction:"ตกอยู่ในสถานการณ์ที่ตามติดกันไปแบบงงๆ มีปัญหาเรื่องการตีความหรือความเข้าใจผิดสูง",work:"การประสานงานจะติดขัดอย่างหนัก มีคนรับปากจะช่วยแต่สุดท้ายก็เป็นเพียงลมปาก",money:"ไม่มีโชคลาภเข้ามา การเงินระวังการถูกหลอกลวงด้วยคำพูดที่สวยหรู",love:"มีความไม่เข้าใจกันอย่างรุนแรง หรือมีมือที่สามเข้ามาแทรกแซงให้วุ่นวาย",health:"ระวังการเจ็บป่วยที่มาจากสภาพแวดล้อม ดูแลสุขอนามัยให้ดี",lucky_numbers:[1,2,8],level:"caution",level_th:"ระวัง"},{stick_number:13,title:"ต้นไม้หน้าแล้ง",prediction:"เปรียบตนเองเป็นต้นไม้ในฤดูแล้ง ต้องซุ่มซ่อนตัวรอคอยสายฝน อย่าเพิ่งอวดเก่งหรือออกหน้าในเวลานี้",work:"ให้ทำตัวเงียบๆ ตามน้ำไปก่อน อย่าเพิ่งนำเสนออะไรใหม่ๆ จะเกิดผลเสียมากกว่าผลดี",money:"โชคลาภกำลังจะมาแต่ต้องรอจังหวะ ยังไม่ใช่ตอนนี้ หากรอได้จะสมหวัง",love:"ค่อนข้างจู้จี้จุกจิก มีเรื่องให้รำคาญใจกันบ่อย คนโสดยังไม่เจอคนถูกใจ",health:"สุขภาพต้องการการดูแลเป็นพิเศษ หลีกเลี่ยงความเครียดและพักผ่อนให้เพียงพอ",lucky_numbers:[1,3,4],level:"caution",level_th:"ระวัง"},{stick_number:14,title:"ฟ้าดินปิดทวาร",prediction:"เป็นช่วงเวลาที่มืดแปดด้าน เหมือนฟ้าดินปิดประตูใส่ จะไปพึ่งพาใครก็เข้าไม่ถึง ต้องระวังตัวให้มาก",work:"เจออุปสรรคชิ้นใหญ่ เจ้านายไม่สนับสนุน เพื่อนร่วมงานพึ่งไม่ได้ ห้ามลงทุนหรือขยับขยายเด็ดขาด",money:"ลำบากฝืดเคือง อย่าให้ใครยืมเงินและอย่าไปยืมใคร โชคลาภมืดมน",love:"ไม่สู้ดี มีเรื่องให้ระแวงแคลงใจ ความสัมพันธ์ไม่คืบหน้าและอาจถอยหลัง",health:"สุขภาพต้องระวังเป็นพิเศษ หลีกเลี่ยงกิจกรรมเสี่ยงและดูแลตัวเองอย่างดี",lucky_numbers:[1,4,0],level:"bad",level_th:"ร้าย"},{stick_number:15,title:"สโมสรสมคิด",prediction:"เป็นใบที่ประเสริฐยิ่งนัก คิดการสิ่งใดก็ไร้กังวล จะประสบความสำเร็จสมประสงค์ทุกประการ",work:"ค้าขายได้กำไรดีมาก หน้าที่การงานเจริญก้าวหน้า ได้รับการสนับสนุนจากทุกฝ่าย",money:"โชคลาภเป็นที่หนึ่ง ของหายจะได้คืน ลูกหนี้จะนำเงินมาใช้คืน",love:"สมหวังทุกประการ คนโสดจะเจอคู่ชูชื่น คนมีคู่ครอบครัวจะมีความสุข",health:"สุขภาพแข็งแรงสมบูรณ์ ร่างกายและจิตใจอยู่ในสภาพดีเยี่ยม",lucky_numbers:[1,5,9],level:"very_good",level_th:"ดีมาก"},{stick_number:16,title:"ผู้อุปถัมภ์",prediction:"จะได้พบกับคนที่มีบุญบารมีและจิตใจเมตตาเข้ามาช่วยเหลืออุปถัมภ์ค้ำชู อนาคตจะมีความเจริญรุ่งเรือง",work:"ราบรื่นสุดๆ เจ้านายหรือผู้ใหญ่ให้ความไว้วางใจและดึงตัวไปร่วมงานสำคัญ",money:"การเงินดีเยี่ยม มีโชคลาภเข้ามาอย่างต่อเนื่อง หยิบจับอะไรก็สำเร็จ",love:"คนโสดจะได้เจอคู่ครองที่มีเกียรติและฐานะดี คนมีคู่จะส่งเสริมเกื้อกูลกัน",health:"สุขภาพดีมาก มีพลังงานเหลือเฟือ เหมาะกับการดูแลสุขภาพเชิงป้องกัน",lucky_numbers:[1,6,8],level:"very_good",level_th:"ดีมาก"},{stick_number:17,title:"หว่านทุนวุ่นวาย",prediction:"สิ่งที่คาดหวังไว้จะไม่สำเร็จตามเป้าหมาย หากดันทุรังลงทุนหรือทำอะไรเกินตัวจะวุ่นวายและนำภัยมาสู่ตน",work:"ห้ามขยายกิจการหรือลงทุนเพิ่มเด็ดขาด ให้ระวังปัญหาข้อพิพาทหรือคดีความ",money:"ระวังการสูญเสียเงินก้อนใหญ่ โชคลาภไม่มี ลูกหนี้ไม่ยอมจ่ายเงิน",love:"ไม่ดี มีโอกาสแตกหักหรือทะเลาะเบาะแว้งรุนแรง คนโสดระวังโดนหลอกลวง",health:"ระวังความเครียดและความวิตกกังวล ทำสมาธิและออกกำลังกายเบาๆ",lucky_numbers:[1,7,3],level:"caution",level_th:"ระวัง"},{stick_number:18,title:"ทรัพย์ติดหิน",prediction:"ทำอะไรช่วงนี้ก็ป่วยการเปล่า เปรียบเหมือนพยายามหาทรัพย์ที่ติดอยู่ในซอกหิน เหนื่อยเปล่าและไม่ได้ประโยชน์อะไรเลย",work:"เหน็ดเหนื่อยแต่ไม่มีใครเห็นค่า งานไม่เดินหน้า ระวังเรื่องคดีความต้องหาทางหลีกเลี่ยง",money:"โชคลาภไม่มีเลย หาเงินยากลำบาก ต้องรัดเข็มขัดอย่างหนัก",love:"ยังไม่ถึงเวลาสมหวัง ต้องปล่อยให้เวลาผ่านไปก่อนจึงจะมีเกณฑ์ดีขึ้น",health:"ร่างกายเหนื่อยล้า ต้องการการพักผ่อนอย่างจริงจัง อย่าฝืนทำงานหนักเกินไป",lucky_numbers:[1,8,4],level:"bad",level_th:"ร้าย"},{stick_number:19,title:"ยั้งหยุดตรึกตรอง",prediction:"เมื่อถึงเวลาที่ดีทุกอย่างจะดีเอง ตอนนี้ให้ยั้งคิดและตรึกตรองให้ดีก่อนลงมือทำสิ่งใด",work:"ให้ดำเนินงานไปตามปกติ ไม่ต้องเร่งรีบ ปลายทางจะประสบความสำเร็จและมั่นคงยั่งยืน",money:"มีโชคลาภเข้ามาพอสมควรตามที่ตั้งใจไว้ คดีความไม่ค่อยดีนักควรไกล่เกลี่ย",love:"มั่นคงและดูแลกันไปจนแก่เฒ่า คนโสดจะเจอเนื้อคู่ที่อายุมากกว่าหรือมีความเป็นผู้ใหญ่",health:"สุขภาพอยู่ในเกณฑ์ดี ดูแลตัวเองต่อเนื่องและอย่าลืมตรวจสุขภาพประจำปี",lucky_numbers:[1,9,5],level:"neutral",level_th:"กลาง"},{stick_number:20,title:"ความไม่ซื่อตรง",prediction:"คนรอบข้างอาจไม่ซื่อสัตย์หรือพึ่งพาไม่ได้ ต้องระวังตัวให้มาก เป็นใบที่ตกเคราะห์ ควรทำบุญสะเดาะเคราะห์เพื่อผ่อนหนักเป็นเบา",work:"ระวังคนทรยศหักหลัง ลูกน้องหรือเพื่อนร่วมงานอาจนำปัญหามาให้ ต้องพึ่งพาตนเองเป็นหลัก",money:"ลาภผลยังมองไม่เห็นทาง ได้เงินมาก็มีเหตุให้ต้องจ่ายออกไป",love:"อึดอัดใจและยังไม่สมหวัง การขอบุตรในช่วงนี้มักจะผิดหวัง",health:"ระวังการเจ็บป่วยที่เกิดจากความเครียดสะสม พักผ่อนและทำจิตใจให้ผ่องใส",lucky_numbers:[2,0,7],level:"caution",level_th:"ระวัง"},{stick_number:21,title:"ลูกนกหัดบิน",prediction:"แม้จะต้องเจอลมแดดแผดเผา แต่ในท้ายที่สุดจะรอดพ้นอุปสรรคและกลับมารื่นรมย์สบายใจได้",work:"ช่วงต้นอาจจะล้มลุกคลุกคลานหรือมีข้อผิดพลาด แต่เมื่อตั้งหลักได้จะมีความเจริญก้าวหน้า",money:"มีโชคลาภเล็กๆ น้อยๆ พอให้ชื่นใจ คดีความจะต่อสู้ได้ยากและลำบาก",love:"คนรักที่อยู่ห่างไกลจะยังไม่ได้เจอกัน ต้องรอคอยไปก่อน",health:"สุขภาพดีพอประมาณ ระวังอุบัติเหตุเล็กน้อยจากความประมาท",lucky_numbers:[2,1,6],level:"neutral",level_th:"กลาง"},{stick_number:22,title:"เดินตามหลังผู้ใหญ่",prediction:"อย่าตัดสินใจทำอะไรด้วยความหูเบาหรือคิดเอาเองเพียงลำพัง ต้องปรึกษาหารือผู้ใหญ่หรือผู้มีความรู้ แล้วสิ่งที่หวังจะประสบความสำเร็จ",work:"ให้ยึดหลักเกณฑ์โบราณหรือแนวทางที่รุ่นพี่ทำไว้ จะราบรื่นและมีคนคอยสนับสนุน",money:"มีโชคลาภเข้ามามากมายดั่งใจหมาย หากขอความช่วยเหลือจากใครก็จะได้รับ",love:"สมหวังและมีความสุข หากมีผู้ใหญ่คอยเป็นแม่สื่อแม่ชักจะยิ่งดีเยี่ยม",health:"สุขภาพดี แต่ควรปรึกษาแพทย์หรือผู้เชี่ยวชาญก่อนตัดสินใจเรื่องสุขภาพสำคัญ",lucky_numbers:[2,2,9],level:"neutral",level_th:"กลาง"},{stick_number:23,title:"ความดีเป็นศรีสุข",prediction:"เป็นใบที่ให้คุณอย่างมาก ความดีที่ทำมาจะส่งผลให้มีความสุขทั้งครอบครัว ไม่มีความทุกข์ใดๆ มาแผ้วพาน",work:"กิจการเจริญรุ่งเรือง หากมีคดีความก็จะชนะอย่างแน่นอน ไร้อุปสรรคขวากหนาม",money:"โชคลาภดีเลิศ ทุกอย่างสมบูรณ์พร้อม",love:"สดใสและมีความสุขมาก คนโสดจะได้เจอคู่ที่เหมาะสมและส่งเสริมกัน",health:"สุขภาพดีเยี่ยม ร่างกายและจิตใจสมดุล เหมาะกับการเริ่มต้นสิ่งดีๆ ในชีวิต",lucky_numbers:[2,3,5],level:"very_good",level_th:"ดีมาก"},{stick_number:24,title:"ม้าทองคอยท่า",prediction:"สิ่งที่หวังไว้อาจจะยังดูห่างไกล แต่อีกเพียงไม่นานจะประสบความสำเร็จ มีโชคใหญ่รออยู่เบื้องหน้า",work:"ก้าวหน้าอย่างมั่นคง ผู้ใหญ่ให้การยอมรับและพร้อมผลักดันให้ได้เลื่อนขั้นเลื่อนตำแหน่ง",money:"โชคลาภโดดเด่นมากในอนาคตอันใกล้ อดใจรออีกนิดจะได้ผลตอบแทนก้อนใหญ่",love:"มีความสุขความเจริญ คนที่เข้ามาในช่วงนี้จะเป็นคนมีเกียรติและมีฐานะ",health:"สุขภาพดี มีแนวโน้มที่ดีขึ้น อาการเจ็บป่วยที่มีอยู่จะค่อยๆ ทุเลาลง",lucky_numbers:[2,4,8],level:"good",level_th:"ดี"},{stick_number:25,title:"เรือเล็กกลางสาคร",prediction:"ชีวิตตอนนี้เหมือนเรือลำเล็กที่ลอยอยู่กลางมหาสมุทร ต้องพายทวนลมและเผชิญกับพายุที่ถาโถม จะทำอะไรก็ยากลำบากไปหมด",work:"มีอุปสรรคหนักหนาสาหัส การเดินทางไปทิศใต้หรือตะวันตกอาจพอมีทางออกบ้าง",money:"โชคลาภเหลวไหลหายไปหมด ของหายไม่มีทางได้คืน ห้ามลงทุนเด็ดขาด",love:"เหนื่อยล้าและอ้างว้าง ไม่สามารถพึ่งพาคนรักได้ หรืออาจต้องห่างเหินกัน",health:"ร่างกายอ่อนแอ ต้องการการพักผ่อนและการดูแลเป็นพิเศษ",lucky_numbers:[2,5,0],level:"bad",level_th:"ร้าย"},{stick_number:26,title:"เจียมเสงี่ยมตัว",prediction:"ใกล้จะถึงเวลาที่ดอกไม้ผลิบานแล้ว หากมีความทุกข์ร้อนให้ค่อยๆ ผ่อนปรนไป ต้องรู้จักเจียมตัว อย่าทำอะไรวู่วามเด็ดขาด",work:"ห้ามใจร้อนหรือใช้อารมณ์ตัดสินปัญหา มิฉะนั้นจะเกิดความมัวหมองและเสียงาน",money:"โชคลาภยังไม่มีให้เห็นในตอนนี้ ระวังจะทำประโยชน์ให้คนอื่นโดยที่ตนเองไม่ได้อะไร",love:"อยู่ในเกณฑ์ปานกลาง ต้องอาศัยความเข้าใจและการยอมให้กัน",health:"สุขภาพทรงตัว หลีกเลี่ยงความเครียดและอาหารที่ไม่มีประโยชน์",lucky_numbers:[2,6,4],level:"neutral",level_th:"กลาง"},{stick_number:27,title:"เสร็จสมอารมณ์หมาย",prediction:"ถือเป็นใบที่ประเสริฐที่สุดใบหนึ่ง ทุกอย่างจะสำเร็จสมความปรารถนา เปรียบเสมือนต้นไม้แห้งตายที่กลับแตกกิ่งใบใหม่",work:"ปัญหาที่คิดว่าถึงทางตันจะพลิกกลับมาแก้ไขได้ คดีความจะชนะและรอดพ้นจากความเครียด",money:"ดีเยี่ยม มีเกณฑ์ได้รับโชคลาภใหญ่ คนป่วยจะหายเป็นปลิดทิ้ง",love:"คนหนุ่มสาวจะมีความรักที่ชุ่มชื่น ครอบครัวจะร่มเย็นเป็นสุขและรักกันยั่งยืน",health:"สุขภาพดีเยี่ยม อาการเจ็บป่วยจะหายไปอย่างรวดเร็ว ร่างกายและจิตใจสดใส",lucky_numbers:[2,7,9],level:"very_good",level_th:"ดีมาก"},{stick_number:28,title:"คิดตรึกตรอง",prediction:"สิ่งที่คิดไว้มีแนวโน้มจะสำเร็จ แต่ต้องรู้จักวิเคราะห์สถานการณ์ให้ลึกซึ้ง แสงสว่างรออยู่ข้างหน้า คนดีๆ ก็อยู่เคียงข้าง",work:"อนาคตสดใส การงานไปได้สวย แต่ห้ามมีเรื่องคดีความเด็ดขาดเพราะจะแพ้และหนักหนาสาหัส",money:"โชคลาภดีแท้ มีผู้ใหญ่ที่นั่งเคียงข้างพร้อมให้การสนับสนุนทางการเงิน",love:"สมหวังดังที่ใจคิด คนรักคอยอยู่เคียงข้างและเป็นกำลังใจให้เสมอ",health:"สุขภาพดี แต่ควรใส่ใจการตรวจสุขภาพและป้องกันก่อนเจ็บป่วย",lucky_numbers:[2,8,5],level:"neutral",level_th:"กลาง"}];
+
+// Thai numerals
+const THAI_NUMS={'0':'๐','1':'๑','2':'๒','3':'๓','4':'๔','5':'๕','6':'๖','7':'๗','8':'๘','9':'๙'};
+function toThai(n){return String(n).split('').map(d=>THAI_NUMS[d]||d).join('');}
+
+const LV_ICON={very_good:'⭐ ดีมาก',good:'✨ ดี',neutral:'☁️ กลาง',caution:'⚠️ ระวัง',bad:'🌧️ ร้าย'};
+
+let isHolding=false;
+let holdTimer=null;
+let holdInterval=null;
+let holdProgress=0;
+let holdTarget=0; // random 1.5-3.5s
+let isShaking=false;
+let currentResult=null;
+
+// Natural random hold duration
+function randomHoldTime(){return 1500+Math.random()*2000;}
+
+function startHold(e){
+  if(isShaking)return;
+  if(e&&e.cancelable)e.preventDefault();
+  isHolding=true;
+  holdTarget=randomHoldTime();
+  holdProgress=0;
+  const bar=document.getElementById('holdBar');
+  bar.style.width='0%';
+  document.getElementById('gyroTip').textContent='กำลังตั้งจิต... ค้างไว้สักครู่';
+  holdInterval=setInterval(()=>{
+    if(!isHolding){clearInterval(holdInterval);return;}
+    holdProgress+=50;
+    const pct=Math.min(100,holdProgress/holdTarget*100);
+    bar.style.width=pct+'%';
+    if(holdProgress>=holdTarget){
+      clearInterval(holdInterval);
+      doShake();
+    }
+  },50);
+}
+
+function endHold(){
+  if(!isHolding)return;
+  isHolding=false;
+  clearInterval(holdInterval);
+  if(!isShaking){
+    document.getElementById('holdBar').style.width='0%';
+    document.getElementById('gyroTip').textContent='';
+  }
+}
+
+function doShake(){
+  if(isShaking)return;
+  isShaking=true;
+  isHolding=false;
+  clearInterval(holdInterval);
+  const body=document.getElementById('canisterBody');
+  body.classList.add('shaking');
+  document.getElementById('shakeBtn').disabled=true;
+  document.getElementById('gyroTip').textContent='🎋 กำลังเขย่า...';
+  document.getElementById('holdBar').style.width='100%';
+
+  setTimeout(()=>{
+    body.classList.remove('shaking');
+    // fly one stick
+    const idx=Math.floor(Math.random()*5);
+    const stick=document.getElementById('s'+(idx+1));
+    stick.classList.add('flying');
+    setTimeout(showResult,600);
+  },600);
+}
+
+function showResult(){
+  const d=DATA[Math.floor(Math.random()*DATA.length)];
+  currentResult=d;
+
+  // Paper slip
+  document.getElementById('pTemple').textContent='พุทธโสธร';
+  document.getElementById('pNumber').textContent='ใบที่ '+toThai(d.stick_number);
+  document.getElementById('pLevel').className='paper-level lv-'+d.level;
+  document.getElementById('pLevel').textContent=LV_ICON[d.level];
+  document.getElementById('pTitle').textContent=d.title;
+  document.getElementById('pBody').textContent=d.prediction;
+
+  // Detail cards
+  document.getElementById('detailGrid').innerHTML=`
+    <div class="d-card"><div class="d-icon">💼</div><div class="d-lbl">การงาน</div><div class="d-txt">${d.work}</div></div>
+    <div class="d-card"><div class="d-icon">💰</div><div class="d-lbl">การเงิน</div><div class="d-txt">${d.money}</div></div>
+    <div class="d-card"><div class="d-icon">❤️</div><div class="d-lbl">ความรัก</div><div class="d-txt">${d.love}</div></div>
+    <div class="d-card"><div class="d-icon">🌿</div><div class="d-lbl">สุขภาพ</div><div class="d-txt">${d.health}</div></div>
+  `;
+
+  // Lucky numbers
+  document.getElementById('luckyNums').innerHTML=d.lucky_numbers.map(n=>`<div class="lucky-num">${n}</div>`).join('');
+
+  // Show
+  document.getElementById('shakeSection').style.display='none';
+  const rs=document.getElementById('resultSection');
+  rs.classList.add('visible');
+  window.scrollTo({top:0,behavior:'smooth'});
+  isShaking=false;
+}
+
+function resetShake(){
+  currentResult=null;
+  isShaking=false;
+  document.querySelectorAll('.stick-item').forEach(s=>s.classList.remove('flying'));
+  document.getElementById('shakeBtn').disabled=false;
+  document.getElementById('holdBar').style.width='0%';
+  document.getElementById('gyroTip').textContent='';
+  document.getElementById('shakeSection').style.display='block';
+  document.getElementById('resultSection').classList.remove('visible');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function doShare(){
+  if(!currentResult)return;
+  const d=currentResult;
+  const text=`🎋 เซียมซีวัดหลวงพ่อโสธร\nใบที่ ${d.stick_number} — ${d.title} ${LV_ICON[d.level]}\n\n${d.prediction}\n\n💼 ${d.work.slice(0,50)}...\n\n🎯 เลขมงคล: ${d.lucky_numbers.join(', ')}\n\n🙏 เขย่าเซียมซีออนไลน์ได้ที่ kambheerduang.com`;
+  const url='https://kambheerduang.com/เซียมซี/วัดหลวงพ่อโสธร/';
+  if(navigator.share){navigator.share({title:'เซียมซีวัดหลวงพ่อโสธร',text,url});}
+  else{navigator.clipboard&&navigator.clipboard.writeText(text+'\n'+url).then(()=>alert('คัดลอกแล้ว วางใน LINE ได้เลย'));}
+}
+
+// Gyroscope
+let lastGyro=0;
+if(window.DeviceMotionEvent){
+  document.getElementById('gyroTip').textContent='📱 เขย่าโทรศัพท์ได้เลย หรือกดปุ่มด้านบน';
+  window.addEventListener('devicemotion',e=>{
+    if(document.getElementById('resultSection').classList.contains('visible'))return;
+    const a=e.accelerationIncludingGravity;
+    if(!a)return;
+    const mag=Math.sqrt(a.x*a.x+a.y*a.y+a.z*a.z);
+    const now=Date.now();
+    if(mag>18&&now-lastGyro>1200){
+      lastGyro=now;
+      doShake();
+    }
+  });
+}
+if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){
+  document.getElementById('shakeBtn').addEventListener('click',function(){
+    DeviceMotionEvent.requestPermission().catch(()=>{});
+  },{once:true});
+}
+</script>
+</body>
+</html>
